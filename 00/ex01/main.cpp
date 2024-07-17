@@ -1,31 +1,33 @@
 #include <iostream>
 #include <string>
-#include "PhoneBook.hpp"
-#include "Contact.hpp"
-
-void	stdin_clear(void)
-{
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-}
+#include "./include/Contact.hpp"
+#include "./include/PhoneBook.hpp"
 
 int	main(void)
 {
 	PhoneBook book;
+	Contact	contact;
 	std::string	input;
 
-	book.store[0].first_name = "KOJI";
-	book.store[1].first_name = "YUTA";
-	while (1)
+	while (std::cin.eof() == false)
 	{
 		std::cout << "PhoneBook prompt >> ";
-		std::cin >> input;
+		std::getline(std::cin, input);
 		if (input == "ADD")
-			std::cout << input << std::endl;
+		{
+			contact.set_info();
+			book.add(contact);
+			contact.delete_info();
+		}
 		if (input == "SEARCH")
 			book.search();
 		if (input == "EXIT")
-			std::cout << input << std::endl;
-		stdin_clear();
+		{
+			std::cout << "Terminate this program." << std::endl;
+			break ;
+		}
 	}
-	book.search();
+	if (std::cin.eof() == true)
+		std::cout << "\nYou enter EOF, this program is terminated." << std::endl;
+	return (0);
 }

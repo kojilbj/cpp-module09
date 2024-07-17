@@ -1,7 +1,7 @@
 CP=c++
 CFLAGS= -Wall -Wextra -Werror -std=c++98
-NAME=phonebook
-SRC=./main.cpp ./Contact.cpp ./PhoneBook.cpp
+NAME=JOYD
+SRC=./tests.cpp ./Account.cpp
 OBJ=$(SRC:.cpp=.o)
 
 all: $(NAME)
