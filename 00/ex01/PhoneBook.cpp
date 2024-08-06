@@ -16,11 +16,12 @@ PhoneBook::~PhoneBook(void)
 
 void	PhoneBook::add(Contact data)
 {
-	if (_index == 7)
+	if (_index == 8)
 	{
 		_full = true;
 		_index = 0;
 	}
+	std::cout << "This contact is restored in " << _index + 1<<  "." << std::endl;
 	_store[_index] = data;
 	_index++;
 }

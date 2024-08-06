@@ -34,7 +34,7 @@ bool	Contact::_set_info_util(std::string &data)
 	std::getline(std::cin, data);
 	if (std::cin.eof() == true)
 	{
-		std::cout << "\nYou enter EOF, this program is terminated." << std::endl;
+		std::cout << "\nYou entered EOF, this program is terminated." << std::endl;
 		exit (EXIT_SUCCESS);
 	}
 	std::cin.clear();

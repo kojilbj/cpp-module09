@@ -28,6 +28,6 @@ int	main(void)
 		}
 	}
 	if (std::cin.eof() == true)
-		std::cout << "\nYou enter EOF, this program is terminated." << std::endl;
+		std::cout << "\nYou entered EOF, this program is terminated." << std::endl;
 	return (0);
 }
