@@ -1,28 +1,28 @@
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
-#include <string>
-#include <iostream>
 #include <iomanip>
+#include <iostream>
+#include <string>
 
-class	Contact
+class Contact
 {
-	private:
-		std::string	_first_name;
-		std::string	_last_name;
-		std::string	_nickname;
-		std::string	_phone_number;
-		std::string	_darkest_secret;
+public:
+	Contact(void);
+	~Contact(void);
 
-		bool	_is_all_space(std::string data) const;
-		bool	_set_info_util(std::string &data);
+	void setInfo(void);
+	void showInfo(int index) const;
+	void deleteInfo(void);
 
-	public:
-		Contact(void);
-		~Contact(void);
+private:
+	std::string firstName_;
+	std::string lastName_;
+	std::string nickName_;
+	std::string phoneNumber_;
+	std::string darkestSecret_;
 
-		void	set_info(void);
-		void	show_info(int index) const;
-		void	delete_info(void);
+	bool isAllSpace(std::string data) const;
+	bool setInfoUtil(std::string& data);
 };
 
 #endif

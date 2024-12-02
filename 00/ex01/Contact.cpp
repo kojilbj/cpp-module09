@@ -2,21 +2,18 @@
 
 Contact::Contact(void)
 {
-	_first_name = "";
-	_last_name = "";
-	_nickname = "";
-	_phone_number = "";
-	_darkest_secret = "";
+	firstName_ = "";
+	lastName_ = "";
+	nickName_ = "";
+	phoneNumber_ = "";
+	darkestSecret_ = "";
 }
 
-Contact::~Contact(void)
-{
+Contact::~Contact(void) { }
 
-}
-
-bool	Contact::_is_all_space(std::string data) const
+bool Contact::isAllSpace(std::string data) const
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (i < data.length())
@@ -28,63 +25,63 @@ bool	Contact::_is_all_space(std::string data) const
 	return (true);
 }
 
-bool	Contact::_set_info_util(std::string &data)
+bool Contact::setInfoUtil(std::string& data)
 {
 	std::cin.clear();
 	std::getline(std::cin, data);
 	if (std::cin.eof() == true)
 	{
 		std::cout << "\nYou entered EOF, this program is terminated." << std::endl;
-		exit (EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 	}
 	std::cin.clear();
-	if (data.length() == 0 || _is_all_space(data) == true)
+	if (data.length() == 0 || isAllSpace(data) == true)
 		return (false);
 	return (true);
 }
 
-void	Contact::set_info(void)
+void Contact::setInfo(void)
 {
 	std::cout << "first name: ";
-	while (_set_info_util(_first_name) == false)
+	while (setInfoUtil(firstName_) == false)
 		std::cout << "first name: ";
 	std::cout << "last name: ";
-	while (_set_info_util(_last_name) == false)
+	while (setInfoUtil(lastName_) == false)
 		std::cout << "last name: ";
 	std::cout << "nick name: ";
-	while (_set_info_util(_nickname) == false)
+	while (setInfoUtil(nickName_) == false)
 		std::cout << "nick name: ";
 	std::cout << "phone number: ";
-	while (_set_info_util(_phone_number) == false)
+	while (setInfoUtil(phoneNumber_) == false)
 		std::cout << "phone number: ";
 	std::cout << "darkest secret: ";
-	while (_set_info_util(_darkest_secret) == false)
+	while (setInfoUtil(darkestSecret_) == false)
 		std::cout << "darkest secret: ";
 }
 
-void	Contact::show_info(int index) const
+void Contact::showInfo(int index) const
 {
 	std::cout << std::right << std::setw(10) << index << "|";
-	if (_first_name.length() < 10)
-		std::cout << std::right << std::setw(10) << _first_name << "|";
+	if (firstName_.length() < 10)
+		std::cout << std::right << std::setw(10) << firstName_ << "|";
 	else
-		std::cout << std::right << std::setw(10) << _first_name.substr(0, 9) << ".|";
-	if (_last_name.length() < 10)	
-		std::cout << std::right << std::setw(10) << _last_name << "|";
+		std::cout << std::right << std::setw(10) << firstName_.substr(0, 9) << ".|";
+	if (lastName_.length() < 10)
+		std::cout << std::right << std::setw(10) << lastName_ << "|";
 	else
-		std::cout << std::right << std::setw(10) << _last_name.substr(0, 9) << ".|";
-	if (_nickname.length() < 10)
-		std::cout << std::right << std::setw(10) << _nickname << "|";
+		std::cout << std::right << std::setw(10) << lastName_.substr(0, 9) << ".|";
+	if (nickName_.length() < 10)
+		std::cout << std::right << std::setw(10) << nickName_ << "|";
 	else
-		std::cout << std::right << std::setw(10) << _nickname.substr(0, 9) << ".|";
+		std::cout << std::right << std::setw(10) << nickName_.substr(0, 9) << ".|";
 	std::cout << std::endl;
 }
 
-void	Contact::delete_info(void)
+void Contact::deleteInfo(void)
 {
-	_first_name.erase(0);
-	_last_name.erase(0);
-	_nickname.erase(0);
-	_phone_number.erase(0);
-	_darkest_secret.erase(0);
+	firstName_.erase(0);
+	lastName_.erase(0);
+	nickName_.erase(0);
+	phoneNumber_.erase(0);
+	darkestSecret_.erase(0);
 }

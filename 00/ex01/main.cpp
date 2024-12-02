@@ -1,13 +1,13 @@
-#include <iostream>
-#include <string>
 #include "./include/Contact.hpp"
 #include "./include/PhoneBook.hpp"
+#include <iostream>
+#include <string>
 
-int	main(void)
+int main(void)
 {
 	PhoneBook book;
-	Contact	contact;
-	std::string	input;
+	Contact contact;
+	std::string input;
 
 	while (std::cin.eof() == false)
 	{
@@ -15,16 +15,16 @@ int	main(void)
 		std::getline(std::cin, input);
 		if (input == "ADD")
 		{
-			contact.set_info();
+			contact.setInfo();
 			book.add(contact);
-			contact.delete_info();
+			contact.deleteInfo();
 		}
 		if (input == "SEARCH")
 			book.search();
 		if (input == "EXIT")
 		{
 			std::cout << "Terminate this program." << std::endl;
-			break ;
+			break;
 		}
 	}
 	if (std::cin.eof() == true)

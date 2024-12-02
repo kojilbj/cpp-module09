@@ -1,6 +1,8 @@
 CP=c++
-CFLAGS= -Wall -Wextra -Werror -std=c++98
-NAME=phonebook
+CFLAGS= -Wall -Wextra -Werror
+#CFLAGS+=-std=c++98
+#CFLAGS+=-g -fsanitize=address
+NAME=MyAwesomePhoneBook
 SRC=./main.cpp ./Contact.cpp ./PhoneBook.cpp
 OBJ=$(SRC:.cpp=.o)
 

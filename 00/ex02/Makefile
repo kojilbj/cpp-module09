@@ -1,5 +1,7 @@
 CP=c++
-CFLAGS= -Wall -Wextra -Werror -std=c++98
+CFLAGS= -Wall -Wextra -Werror
+#CFLAGS+=-std=c++98
+#CFLAGS+=-g -fsanitize=address
 NAME=JOYD
 SRC=./tests.cpp ./Account.cpp
 OBJ=$(SRC:.cpp=.o)
