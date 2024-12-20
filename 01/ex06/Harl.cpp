@@ -1,6 +1,6 @@
-#include <string>
 #include "./Harl.hpp"
 #include <iostream>
+#include <string>
 
 Harl::Harl(void)
 {
@@ -28,16 +28,30 @@ void	Harl::complain(std::string level)
 	switch (i)
 	{
 		case 0:
+		{
 			(this->*funcs[0])();
+			std::cout << std::endl;
+		}
 		case 1:
+		{
 			(this->*funcs[1])();
+			std::cout << std::endl;
+		}
 		case 2:
+		{
 			(this->*funcs[2])();
+			std::cout << std::endl;
+		}
 		case 3:
+		{
 			(this->*funcs[3])();
 			break;
+		}
 		default:
+		{
+			std::cout << "Input DEBUG, INFO, WARNING or ERROR" << std::endl;
 			break;
+		}
 	}
 }
 

@@ -30,11 +30,17 @@ int	main(int ac, char *av[])
 	}
 	infile_name = av[1];
 	infile.open(infile_name, std::fstream::in);
+	if (!infile.is_open())
+	{
+		std::cerr << "Error Infile open" << std::endl;
+		infile.close();
+		return (1);
+	}
 	outfile_name = infile_name + ".replace";
 	outfile.open(outfile_name, std::fstream::out);
-	if (infile.is_open() == false || outfile.is_open() == false)
+	if (!outfile.is_open())
 	{
-		std::cerr << "open: " << std::strerror(errno) << std::endl;
+		std::cerr << "Error Outfile open" << std::endl;
 		infile.close();
 		outfile.close();
 		return (1);
