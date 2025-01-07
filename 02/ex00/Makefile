@@ -1,5 +1,5 @@
 CP=c++
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -std=c++98
 SRCS=main.cpp Fixed.cpp
 NAME=fixed
 OBJS=$(SRCS:.cpp=.o)

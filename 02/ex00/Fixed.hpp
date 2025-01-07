@@ -16,7 +16,7 @@ class	Fixed
 
 	private:
 		int	value_;
-		static const int	fractiohl_bits = 8;
+		static const int	fractional_bits = 8;
 };
 
 #endif
