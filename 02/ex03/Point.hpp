@@ -13,8 +13,8 @@ class	Point
 
 		Point&	operator=(const Point& point);
 
-		float	get_x(void) const;
-		float	get_y(void) const;
+		Fixed get_x(void) const;
+		Fixed get_y(void) const;
 	private:
 		const Fixed	x_;
 		const Fixed	y_;

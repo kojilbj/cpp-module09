@@ -1,11 +1,14 @@
 #include "./Point.hpp"
 #include <iostream>
 
+//calcurate triangle area
 static Fixed	triangle_area(const Point a, const Point b, const Point c)
 {
 	Fixed	area;
 
-	area = Fixed((float)(abs(a.get_x() * (b.get_y() - c.get_y()) + b.get_x() * (c.get_y() - a.get_y()) + c.get_x() * (a.get_y() - b.get_y())) / 2.0));
+	area = ((a.get_x() * (b.get_y() - c.get_y()) + b.get_x() * (c.get_y() - a.get_y()) + c.get_x() * (a.get_y() - b.get_y())) / 2);
+	if (area < 0)
+		area = area * -1;
 	return (area);
 }
 
@@ -21,15 +24,15 @@ bool	bsp(const Point a, const Point b, const Point c, const Point point)
 	// std::cout << "origin_area: " << origin_area.toFloat() << std::endl;
 	area1 = triangle_area(a, b, point);
 	// std::cout << "area1: " << area1.toFloat() << std::endl;
-	if (area1.toFloat() == 0)
+	if (area1 == 0)
 		return (false);
 	area2 = triangle_area(a, point, c);
 	// std::cout << "area2: " << area2.toFloat() << std::endl;
-	if (area2.toFloat() == 0)
+	if (area2 == 0)
 		return (false);
 	area3 = triangle_area(point, b, c);
 	// std::cout << "area3: " << area3.toFloat() << std::endl;
-	if (area3.toFloat() == 0)
+	if (area3 == 0)
 		return (false);
 	sum = area1 + area2;
 	sum = sum + area3;

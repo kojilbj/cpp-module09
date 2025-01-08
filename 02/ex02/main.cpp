@@ -31,6 +31,31 @@ int main(void)
 	std::cout << "2.45 * 0.1" << std::endl;
 	std::cout << c * d << std::endl;
 
-	std::cout << Fixed::max(a, b) << std::endl;
+	std::cout << std::endl;
+
+	Fixed right;
+	Fixed left;
+
+	right.setRawBits(1);
+	left.setRawBits(1);
+	std::cout << "right: " << right << " left: " << left << std::endl;
+	std::cout << "right == left :" << (right == left) << std::endl;
+	std::cout << "right > left :" << (right > left) << std::endl;
+	std::cout << "right < left :" << (right < left) << std::endl;
+	std::cout << "right => left :" << (right >= left) << std::endl;
+	std::cout << "right =< left :" << (right <= left) << std::endl;
+	std::cout << "right != left :" << (right != left) << std::endl;
+	std::cout << std::endl;
+
+	left.setRawBits(2);
+	std::cout << "right: " << right << " left: " << left << std::endl;
+	std::cout << "right == left :" << (right == left) << std::endl;
+	std::cout << "right > left :" << (right > left) << std::endl;
+	std::cout << "right < left :" << (right < left) << std::endl;
+	std::cout << "right => left :" << (right >= left) << std::endl;
+	std::cout << "right =< left :" << (right <= left) << std::endl;
+	std::cout << "right != left :" << (right != left) << std::endl;
+	std::cout << std::endl;
+
 	return 0;
 }
