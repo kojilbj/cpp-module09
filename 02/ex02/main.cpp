@@ -23,13 +23,17 @@ int main(void)
 	Fixed d(0.1f);
 
 	std::cout << "2.45 + 0.1" << std::endl;
-	std::cout << c + d << std::endl;
+	std::cout << "\t2.45: " << Fixed(2.45f).getRawBits() << " 0.1: " << Fixed(0.1f).getRawBits() << std::endl;
+	std::cout << "\t" << c + d << ": " << (c + d).getRawBits()<< std::endl;
 	std::cout << "2.45 - 0.1" << std::endl;
-	std::cout << c - d << std::endl;
+	std::cout << "\t2.45: " << Fixed(2.45f).getRawBits() << " 0.1: " << Fixed(0.1f).getRawBits() << std::endl;
+	std::cout << "\t" << c - d << ": " << (c - d).getRawBits()<< std::endl;
 	std::cout << "2.45 / 0.1" << std::endl;
-	std::cout << c / d << std::endl;
+	std::cout << "\t2.45: " << Fixed(2.45f).getRawBits() << " 0.1: " << Fixed(0.1f).getRawBits() << std::endl;
+	std::cout << "\t" << c / d << ": " << (c / d).getRawBits()<< std::endl;
 	std::cout << "2.45 * 0.1" << std::endl;
-	std::cout << c * d << std::endl;
+	std::cout << "\t2.45: " << Fixed(2.45f).getRawBits() << " 0.1: " << Fixed(0.1f).getRawBits() << std::endl;
+	std::cout << "\t" << c * d << ": " << (c * d).getRawBits()<< std::endl;
 
 	std::cout << std::endl;
 
