@@ -11,12 +11,12 @@ public:
 
 	Fixed& operator=(const Fixed& other);
 
-	int	getRawBits(void) const;
-	void	setRawBits(int const raw);
+	int getRawBits(void) const;
+	void setRawBits(int const raw);
 
 private:
-	int			value_;
-	static const int	fractionalBits = 8;
+	int value_;
+	static const int fractionalBits = 8;
 };
 
 #endif

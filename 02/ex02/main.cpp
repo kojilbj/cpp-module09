@@ -13,6 +13,7 @@ int main(void)
 	std::cout << a << std::endl;
 	std::cout << a++ << std::endl;
 	std::cout << a << std::endl;
+
 	std::cout << b << std::endl;
 	std::cout << Fixed::max(a, b) << std::endl;
 	std::cout << std::endl;
@@ -29,5 +30,7 @@ int main(void)
 	std::cout << c / d << std::endl;
 	std::cout << "2.45 * 0.1" << std::endl;
 	std::cout << c * d << std::endl;
+
+	std::cout << Fixed::max(a, b) << std::endl;
 	return 0;
 }

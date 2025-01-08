@@ -14,19 +14,27 @@ Harl::~Harl(void)
 void	Harl::complain(std::string level)
 {
 	int	i;
+	bool	flag;
 	void	(Harl::*funcs[])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	std::string	levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	i = 0;
+	flag = false;
 	while (i < 4)
 	{
 		if (levels[i] == level)
+		{
 			(this->*funcs[i])();
+			flag = true;
+			break;
+		}
 		i++;
 	}
+	if (!flag)
+		std::cout << "Input DEBUG, INFO, WARNING or ERROR" << std::endl;
 }
 
-	void	Harl::debug(void)
+void	Harl::debug(void)
 {
 	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
 }
