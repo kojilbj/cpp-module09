@@ -146,7 +146,7 @@ float Fixed::toFloat(void) const
 	float ret;
 
 	ret = 0;
-	ret = static_cast<float>(static_cast<double>(value_) / (1 << fractional_bits_));
+	ret = static_cast<float>(value_) / (1 << fractional_bits_);
 	return ret;
 }
 
