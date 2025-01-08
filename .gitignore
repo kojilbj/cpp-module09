@@ -1,6 +1,13 @@
 # Prerequisites
 *.d
 
+#cash file
+.DS_Store
+
+#swap files
+*.swp
+
+
 # Object files
 *.o
 *.ko
