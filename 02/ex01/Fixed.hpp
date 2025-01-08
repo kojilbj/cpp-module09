@@ -16,13 +16,13 @@ class	Fixed
 		
 		Fixed& operator=(const Fixed& other);
 
-		int		getRawBits(void) const;
+		int	getRawBits(void) const;
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
-		int		toInt(void) const;
+		int	toInt(void) const;
 
 	private:
-		int	value_;
+		int			value_;
 		static const int	fractional_bits_ = 8;
 };
 
