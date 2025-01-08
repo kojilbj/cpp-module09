@@ -60,6 +60,12 @@ int main(void)
 	std::cout << "right =< left :" << (right <= left) << std::endl;
 	std::cout << "right != left :" << (right != left) << std::endl;
 	std::cout << std::endl;
+	std::cout << "---------------- Over-flow Test ----------------" << std::endl;
+	Fixed	k;
+	Fixed	z;
 
+	k.setRawBits(INT_MAX / 4);
+	z.setRawBits(3);
+	std::cout << k * z << std::endl;
 	return 0;
 }

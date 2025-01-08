@@ -87,7 +87,7 @@ Fixed Fixed::operator*(const Fixed& fixed) const
 {
 	Fixed tmp;
 
-	tmp.setRawBits((this->getRawBits() * fixed.getRawBits()) >> fractional_bits_);
+	tmp.setRawBits(static_cast<int>((static_cast<int64_t>(this->getRawBits()) * fixed.getRawBits()) >> fractional_bits_));
 	return tmp;
 }
 
@@ -95,7 +95,7 @@ Fixed Fixed::operator/(const Fixed& fixed) const
 {
 	Fixed tmp;
 
-	tmp.setRawBits((this->getRawBits() << fractional_bits_) / fixed.getRawBits());
+	tmp.setRawBits(static_cast<int>((static_cast<int64_t>(this->getRawBits()) << fractional_bits_) / fixed.getRawBits()));
 	return tmp;
 }
 
@@ -146,7 +146,7 @@ float Fixed::toFloat(void) const
 	float ret;
 
 	ret = 0;
-	ret = static_cast<float>(value_) / static_cast<float>(1 << fractional_bits_);
+	ret = static_cast<float>(static_cast<double>(value_) / (1 << fractional_bits_));
 	return ret;
 }
 
