@@ -1,6 +1,7 @@
 #include "./Fixed.hpp"
 #include <iostream>
 #include <string>
+#include <limits.h>
 
 int main(void)
 {
@@ -63,9 +64,17 @@ int main(void)
 	std::cout << "---------------- Over-flow Test ----------------" << std::endl;
 	Fixed	k;
 	Fixed	z;
+	Fixed	i;
 
-	k.setRawBits(INT_MAX / 4);
-	z.setRawBits(3);
-	std::cout << k * z << std::endl;
+	k.setRawBits(INT_MAX);
+	z.setRawBits(256);
+	i.setRawBits((k * z).getRawBits());
+
+	std::cout << "k Raw: " << k.getRawBits() << std::endl;
+	std::cout << "k float: " << k << std::endl;
+	std::cout << "z Raw: " << z.getRawBits() << std::endl;
+	std::cout << "z float: " << z << std::endl;
+	std::cout << "i Raw: " << i.getRawBits() << std::endl;
+	std::cout << "i float: " << i << std::endl;
 	return 0;
 }
