@@ -3,7 +3,7 @@
 
 ClapTrap::ClapTrap(std::string name): name_(name)
 {
-	std::cout << "Constructor called" << std::endl;
+	std::cout << "ClapTrap Constructor called" << std::endl;
 	hit_points_ = 10;
 	energy_points_ = 10;
 	attack_damage_ = 0;
@@ -11,7 +11,7 @@ ClapTrap::ClapTrap(std::string name): name_(name)
 
 ClapTrap::ClapTrap(const ClapTrap& other): name_(other.name_)
 {
-	std::cout << "Copy Constructor called" << std::endl;
+	std::cout << "ClapTrap Copy Constructor called" << std::endl;
 	this->hit_points_ = other.hit_points_;
 	this->energy_points_ = other.hit_points_;
 	this->attack_damage_ = other.attack_damage_;
@@ -19,12 +19,12 @@ ClapTrap::ClapTrap(const ClapTrap& other): name_(other.name_)
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ClapTrap Destructor called" << std::endl;
 }
 
 ClapTrap&	ClapTrap::operator=(const ClapTrap& other)
 {
-	std::cout << "assignment Operator called" << std::endl;
+	std::cout << "ClapTrap assignment Operator called" << std::endl;
 	if (this == &other)
 		return *this;
 	this->hit_points_ = other.hit_points_;
