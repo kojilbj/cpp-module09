@@ -2,28 +2,19 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-ScavTrap::ScavTrap(void): ClapTrap()
-{
-	std::cout << "ScavTrap constructor called" << std::endl;
-	this->hit_points_ = 100;
-	this->energy_points_ = 50;
-	this->attack_damage_ = 20;
-	this->guard_gate_ = false;
-}
-
 ScavTrap::ScavTrap(std::string name): ClapTrap(name)
 {
 	std::cout << "ScavTrap constructor called" << std::endl;
 	this->hit_points_ = 100;
 	this->energy_points_ = 50;
 	this->attack_damage_ = 20;
-	this->guard_gate_ = false;
+	this->guard_gate_mode_ = false;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& scavtrap): ClapTrap(scavtrap)
+ScavTrap::ScavTrap(const ScavTrap& other): ClapTrap(other)
 {
 	std::cout << "ScavTrap copy constructor called" << std::endl;
-	this->guard_gate_ = scavtrap.guard_gate_;
+	this->guard_gate_mode_ = other.guard_gate_mode_;
 }
 
 ScavTrap::~ScavTrap(void)
@@ -31,23 +22,24 @@ ScavTrap::~ScavTrap(void)
 	std::cout << "ScavTrap destructor called" << std::endl;
 }
 
-ScavTrap&	ScavTrap::operator=(const ScavTrap& scavtrap)
+ScavTrap&	ScavTrap::operator=(const ScavTrap& other)
 {
-	std::cout << "ScavTrap assign called" << std::endl;
-	if (this != &scavtrap)
-	{
-		ClapTrap::operator=(scavtrap);
-		this->guard_gate_ = scavtrap.guard_gate_;
-	}
+	std::cout << "ScavTrap assignment operator called" << std::endl;
+	if (this == &other)
+		return *this;
+	this->hit_points_ = other.hit_points_;
+	this->energy_points_ = other.hit_points_;
+	this->attack_damage_ = other.attack_damage_;
+	this->guard_gate_mode_ = other.guard_gate_mode_;
 	return (*this);
 }
 
 void	ScavTrap::guardGate(void)
 {
-	if (this->guard_gate_ == false)
+	if (this->guard_gate_mode_ == false)
 	{
 		std::cout << this->name_ << " turn into guard gate mode" << std::endl;
-		this->guard_gate_ = true;
+		this->guard_gate_mode_ = true;
 	}
 	else
 		std::cout << this->name_ << " is already guard gate mode" << std::endl;

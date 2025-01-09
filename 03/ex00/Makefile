@@ -1,16 +1,16 @@
-CP=c++
-CFLAGS=-Wall -Wextra -Werror
+CXX=c++
+CXXFLAGS=-Wall -Wextra -Werror -std=c++98
 SRCS=main.cpp ClapTrap.cpp
-NAME=claptrap
+NAME=ex00
 OBJS=$(SRCS:.cpp=.o)
 
 all:$(NAME)
 
 $(NAME):$(OBJS)
-	$(CP) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
-%.o:%.c
-	$(CP) $(CFLAGS) -c $< -o $@
+%.o:%.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

@@ -1,45 +1,36 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-ClapTrap::ClapTrap(void)
+ClapTrap::ClapTrap(std::string name): name_(name)
 {
-	std::cout << "ClapTrap Constructor called" << std::endl;
-	name_ = "default";
+	std::cout << "Constructor called" << std::endl;
 	hit_points_ = 10;
 	energy_points_ = 10;
 	attack_damage_ = 0;
 }
 
-ClapTrap::ClapTrap(std::string name)
+ClapTrap::ClapTrap(const ClapTrap& other): name_(other.name_)
 {
-	std::cout << "ClapTrap Constructor called" << std::endl;
-	name_ = name;
-	hit_points_ = 10;
-	energy_points_ = 10;
-	attack_damage_ = 0;
-}
-
-ClapTrap::ClapTrap(const ClapTrap& claptrap)
-{
-	std::cout << "ClapTrap copy constructor called" << std::endl;
-	name_ = claptrap.name_;
-	this->hit_points_ = claptrap.hit_points_;
-	this->energy_points_ = claptrap.hit_points_;
-	this->attack_damage_ = claptrap.attack_damage_;
+	std::cout << "Copy Constructor called" << std::endl;
+	this->hit_points_ = other.hit_points_;
+	this->energy_points_ = other.hit_points_;
+	this->attack_damage_ = other.attack_damage_;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "ClapTrap destructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 }
 
-ClapTrap&	ClapTrap::operator=(const ClapTrap& claptrap)
+ClapTrap&	ClapTrap::operator=(const ClapTrap& other)
 {
-	this->name_ = claptrap.name_;
-	this->hit_points_ = claptrap.hit_points_;
-	this->energy_points_ = claptrap.hit_points_;
-	this->attack_damage_ = claptrap.attack_damage_;
-	return (*this);
+	std::cout << "assignment Operator called" << std::endl;
+	if (this == &other)
+		return *this;
+	this->hit_points_ = other.hit_points_;
+	this->energy_points_ = other.hit_points_;
+	this->attack_damage_ = other.attack_damage_;
+	return *this;
 }
 
 void	ClapTrap::attack(const std::string& target)
@@ -55,7 +46,7 @@ void	ClapTrap::attack(const std::string& target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	if (this->hit_points_ > amount)
+	if (static_cast<unsigned int>(this->hit_points_) > amount)
 		hit_points_ -= amount;
 	else if (this->hit_points_ != 0)
 		hit_points_ = 0;
@@ -64,17 +55,18 @@ void	ClapTrap::takeDamage(unsigned int amount)
 		std::cout << "ClapTrap is already dead" << std::endl;
 		return ;
 	}
-	std::cout << "ClapTrap " << name_ << " take " << amount << " points damage" << std::endl;
+	std::cout << "ClapTrap " << name_ << " take " << amount << " points damage new hit points: " << hit_points_ << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	std::cout << "ClapTrap " << name_ << "be reapaired" << std::endl;
+	std::cout << "ClapTrap " << name_ << " be reapaired" << std::endl;
 	if (energy_points_ == 0)
 	{
 		std::cout << name_ << " has no Energy points" << std::endl;
 		return ;
 	}
 	hit_points_ += amount;
+	std::cout << "new hit points: " << hit_points_ << std::endl;
 	energy_points_--;
 }

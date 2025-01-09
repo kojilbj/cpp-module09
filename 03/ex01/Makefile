@@ -1,7 +1,7 @@
 CXX=c++
 CXXFLAGS=-Wall -Wextra -Werror -std=c++98
-SRCS=main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
-NAME=ex02
+SRCS=main.cpp ClapTrap.cpp ScavTrap.cpp
+NAME=ex01
 OBJS=$(SRCS:.cpp=.o)
 
 all:$(NAME)
