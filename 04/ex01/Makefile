@@ -1,16 +1,16 @@
-CP=c++
-CFLAGS=-Wall -Wextra -Werror
-SRCS=main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
-NAME=brainanimal
+CXX=c++
+CXXFLAGS=-Wall -Wextra -Werror -std=c++98
+SRCS=main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
+NAME=ex01
 OBJS=$(SRCS:.cpp=.o)
 
 all:$(NAME)
 
 $(NAME):$(OBJS)
-	$(CP) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
-%.o:%.c
-	$(CP) $(CFLAGS) -c $< -o $@
+%.o:%.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

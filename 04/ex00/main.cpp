@@ -19,7 +19,7 @@ int	main(void)
 	const WrongAnimal* a = new WrongAnimal();
 	const WrongAnimal* b = new WrongCat();
 	std::cout << b->getType() << " " << std::endl;
-	b->makeSound(); //will output the cat sound!
+	b->makeSound(); 
 	a->makeSound();
 	delete a;
 	delete b;

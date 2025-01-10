@@ -12,13 +12,10 @@ Brain::Brain(const Brain& src)
 
 	std::cout << "Brain copy constructor called" << std::endl;
 	i = 0;
-	if (this != &src)
+	while (i < 100)
 	{
-		while (i < 100)
-		{
-			this->ideas_store_[i] = src.ideas_store_[i];
-			i++;
-		}
+		this->ideas[i] = src.ideas[i];
+		i++;
 	}
 }
 
@@ -31,13 +28,13 @@ Brain&	Brain::operator=(const Brain& src)
 {
 	int	i;
 
-	std::cout << "Brain assign operator called" << std::endl;
+	std::cout << "Brain assignment operator called" << std::endl;
 	i = 0;
 	if (this != &src)
 	{
 		while (i < 100)
 		{
-			this->ideas_store_[i] = src.ideas_store_[i];
+			this->ideas[i] = src.ideas[i];
 			i++;
 		}
 	}

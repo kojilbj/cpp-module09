@@ -12,7 +12,7 @@ class	Brain
 
 		Brain&	operator=(const Brain& src);
 	private:
-		std::string	ideas_store_[100];
+		std::string	ideas[100];
 };
 
 #endif

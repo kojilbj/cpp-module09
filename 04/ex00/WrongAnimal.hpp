@@ -16,7 +16,7 @@ class	WrongAnimal
 		const std::string	getType(void) const;
 
 	protected:
-		std::string	type_;
+		std::string	type;
 };
 
 #endif
