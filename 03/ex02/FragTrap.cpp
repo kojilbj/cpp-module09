@@ -25,7 +25,7 @@ FragTrap&	FragTrap::operator=(const FragTrap& other)
 	if (this == &other)
 		return *this;
 	this->hit_points_ = other.hit_points_;
-	this->energy_points_ = other.hit_points_;
+	this->energy_points_ = other.energy_points_;
 	this->attack_damage_ = other.attack_damage_;
 	return *this;
 }
