@@ -14,6 +14,7 @@ class	ScavTrap: public ClapTrap
 		~ScavTrap(void);
 
 		void guardGate(void);
+		void	attack(const std::string& target);	
 
 	private:
 		bool	guard_gate_mode_;

@@ -13,7 +13,7 @@ ClapTrap::ClapTrap(const ClapTrap& other): name_(other.name_)
 {
 	std::cout << "ClapTrap Copy Constructor called" << std::endl;
 	this->hit_points_ = other.hit_points_;
-	this->energy_points_ = other.hit_points_;
+	this->energy_points_ = other.energy_points_;
 	this->attack_damage_ = other.attack_damage_;
 }
 
@@ -28,7 +28,7 @@ ClapTrap&	ClapTrap::operator=(const ClapTrap& other)
 	if (this == &other)
 		return *this;
 	this->hit_points_ = other.hit_points_;
-	this->energy_points_ = other.hit_points_;
+	this->energy_points_ = other.energy_points_;
 	this->attack_damage_ = other.attack_damage_;
 	return *this;
 }
