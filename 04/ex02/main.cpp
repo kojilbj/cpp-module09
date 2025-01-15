@@ -28,6 +28,18 @@ int	main(void)
 		Cat tmpCat;
 		tmpCat = cat;
 	}
+	{
+		std::cout << "=======Self Assignment Test========" << std::endl;
+		Dog	DogA;
+		Dog	*DogB = &DogA;
+
+		DogA = *DogB;
+
+		Cat	CatA;
+		Cat	*CatB = &CatA;
+
+		CatA = *CatB;
+	}
 	std::cout << "======Original Test Destructor=========" << std::endl;
 	}
 
