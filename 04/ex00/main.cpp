@@ -20,6 +20,31 @@ int	main(void)
 	}
 
 	{
+	std::cout << "=======Copy Assignment Operator========" << std::endl;
+	Dog	DogA;
+	Dog	DogB;
+
+	DogA = DogB;
+
+	Cat	CatA;
+	Cat	CatB;
+
+	CatA = CatB;
+	}
+	{
+	std::cout << "=======Self Assignment========" << std::endl;
+	Dog	DogA;
+	Dog	*DogB = &DogA;
+
+	DogA = *DogB;
+
+	Cat	CatA;
+	Cat	*CatB = &CatA;
+
+	CatA = *CatB;
+	}
+
+	{
 	std::cout << "=======Wrong========" << std::endl;
 	const WrongAnimal* a = new WrongAnimal();
 	const WrongAnimal* b = new WrongCat();
