@@ -12,7 +12,7 @@ int	main(void)
 	delete j;//should not create a leak
 	delete i;
 	}
-	std::cout << "======Original Test Constructor=========" << std::endl;
+	std::cout << "======Original Constructor Test=========" << std::endl;
 	{
 		Dog	dog;
 		Cat	cat;
@@ -28,7 +28,7 @@ int	main(void)
 		Cat tmpCat;
 		tmpCat = cat;
 	}
-	std::cout << "======Original Test Destructor=========" << std::endl;
+	std::cout << "======Original Destructor Test=========" << std::endl;
 	}
 
 	return 0;
