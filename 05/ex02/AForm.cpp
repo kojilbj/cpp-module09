@@ -1,9 +1,13 @@
 #include "AForm.hpp"
 
-AForm::AForm(const std::string &name, int grade_sign, int grade_exe): _name(name), _grade_sign(grade_sign), _grade_exe(grade_exe)
+AForm::AForm(void): _name("default"), _grade_sign(150), _grade_exe(150), _is_signed(false)
+{
+	std::cout << "AForm Default Constructor Called" << std::endl;
+}
+
+AForm::AForm(const std::string &name, int grade_sign, int grade_exe): _name(name), _grade_sign(grade_sign), _grade_exe(grade_exe), _is_signed(false)
 {
 	std::cout << "AForm Constructor Called" << std::endl;
-	_is_signed = false;
 	if (_grade_sign > 150 || _grade_exe > 150)
 		throw(GradeTooLowException());
 	if (_grade_sign < 1 || _grade_exe < 1)
@@ -60,7 +64,7 @@ const char	*AForm::GradeTooHighException::what(void) const throw()
 
 void	AForm::beSigned(const Bureaucrat &bureaucrat)
 {
-	if (bureaucrat.getGrade() < _grade_sign)
+	if (bureaucrat.getGrade() <= _grade_sign)
 		_is_signed = true;
 	else
 		throw GradeTooLowException();
@@ -70,5 +74,6 @@ std::ostream	&operator<<(std::ostream &out, const AForm &aform)
 {
 	out << aform.getName() << ", sign grade " << aform.getGradeSign();
 	out << ", execution grade " << aform.getGradeExe();
+	out << ", is signed: " << (aform.getIsSigned() ? "YES" : "NO");
 	return (out);
 }

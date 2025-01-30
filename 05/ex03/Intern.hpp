@@ -12,10 +12,9 @@ class	Intern
 
 		~Intern(void);
 
-		Intern	&operator=(const Intern &src);
+		Intern	&operator=(const Intern &other);
 
-		AForm	*makeForm(const std::string &nameForm, const std::string &target) const;
+		AForm	*makeForm(const std::string &name, const std::string &target) const;
 
 	private:
-		int	checkFormType(const std::string &nameForm) const;
 };

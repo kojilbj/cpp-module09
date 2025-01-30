@@ -1,9 +1,13 @@
 #include "Bureaucrat.hpp"
 #include <exception>
 
-Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
+Bureaucrat::Bureaucrat(void): _name("default"), _grade(150)
 {
-	_grade = grade;
+	std::cout << "Bureaucrat Default Constructor called" << std::endl;
+}
+
+Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
+{
 	std::cout << "Bureaucrat Constructor called" << std::endl;
 	if (getGrade() < 1)
 		throw(GradeTooHighException());
@@ -11,9 +15,8 @@ Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
 		throw(GradeTooLowException());
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat): _name(bureaucrat.getName())
+Bureaucrat::Bureaucrat(const Bureaucrat &other): _name(other._name), _grade(other._grade)
 {
-	this->_grade = bureaucrat.getGrade();
 	std::cout << "Bureaucrat Copy Constructor called" << std::endl;
 }
 
@@ -22,51 +25,51 @@ Bureaucrat::~Bureaucrat(void)
 	std::cout << "Bureaucrat Destructor called" << std::endl;
 }
 
-Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &bureaucrat)
+Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &other)
 {
-	if (&bureaucrat == this)
-		return (*this);
-	this->_grade = bureaucrat.getGrade();
-	return (*this);
+	if (&other == this)
+		return *this;
+	this->_grade = other._grade;
+	return *this;
 }
 
 
 std::string	Bureaucrat::getName(void) const
 {
-	return (this->_name);
+	return this->_name;
 }
 
 int	Bureaucrat::getGrade(void) const
 {
-	return (this->_grade);
+	return this->_grade;
 }
 
 void	Bureaucrat::upGrade(void)
 {
-	_grade = (getGrade() - 1);
-	if (getGrade() < 1)
+	if (_grade == 1)
 		throw(GradeTooHighException());
+	_grade = _grade - 1;
 }
 
 void	Bureaucrat::downGrade(void)
 {
-	_grade = (getGrade() + 1);
-	if (getGrade() > 150)
+	if (_grade == 150)
 		throw(GradeTooLowException());
+	_grade = _grade + 1;
 }
 
 const char	*Bureaucrat::GradeTooLowException::what(void) const throw()
 {
-	return ("GradeTooLow");
+	return "GradeTooLow";
 }
 
 const char	*Bureaucrat::GradeTooHighException::what(void) const throw()
 {
-	return ("GradeTooHigh");
+	return "GradeTooHigh";
 }
 
 	std::ostream	&operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 {
-	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << std::endl;
-	return (out);
+	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
+	return out;
 }

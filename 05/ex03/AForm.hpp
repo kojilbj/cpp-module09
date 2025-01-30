@@ -10,9 +10,10 @@ class	Bureaucrat;
 class	AForm
 {
 	public:
-		AForm(const std::string &name, int grade_sign = 150, int grade_exe = 150);
+		AForm(void);
+		AForm(const std::string &name, int grade_sign, int grade_exe);
 		AForm(const AForm &src);
-		virtual	~AForm();
+		virtual ~AForm();
 		AForm	&operator=(const AForm &aform);
 
 		//Getters

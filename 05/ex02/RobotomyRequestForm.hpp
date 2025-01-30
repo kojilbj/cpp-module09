@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef ROBOTMYREQESTFORM_HPP
+#define ROBOTMYREQESTFORM_HPP
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include <cstdlib>
@@ -11,12 +11,13 @@ class	Bureacrat;
 class	RobotomyRequestForm: public AForm
 {
 	public:
+		RobotomyRequestForm(void);
 		RobotomyRequestForm(const std::string &target);
 		RobotomyRequestForm(const RobotomyRequestForm &src);
 
 		~RobotomyRequestForm(void);
 
-		RobotomyRequestForm &operator=(const RobotomyRequestForm &src);
+		RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 
 		std::string	getTarget(void) const;
 		void	execute(Bureaucrat const &executor) const;
@@ -25,4 +26,6 @@ class	RobotomyRequestForm: public AForm
 		const std::string	_target;
 };
 
-std::ostream	&operator<<(std::ostream &out, const RobotomyRequestForm &src);
+std::ostream	&operator<<(std::ostream &out, const RobotomyRequestForm &form);
+
+#endif

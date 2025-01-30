@@ -1,7 +1,7 @@
 CXX=c++
 CXXFLAGS=-Wall -Wextra -Werror -std=c++98
 SRCS=main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
-NAME=bureaucrat
+NAME=ex03
 OBJS=$(SRCS:.cpp=.o)
 
 all:$(NAME)
@@ -9,7 +9,7 @@ all:$(NAME)
 $(NAME):$(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
-%.o:%.c
+%.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:

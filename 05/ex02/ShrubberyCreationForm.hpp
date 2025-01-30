@@ -10,12 +10,13 @@ class	Bureaucrat;
 class	ShrubberyCreationForm: public AForm
 {
 	public:
+		ShrubberyCreationForm(void);
 		ShrubberyCreationForm(const std::string &target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &src);
 
 		~ShrubberyCreationForm(void);
 
-		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &src);
+		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 		const std::string	_target;
 
 
@@ -26,6 +27,6 @@ class	ShrubberyCreationForm: public AForm
 	private:
 };
 
-std::ostream	&operator<<(std::ostream &out, const ShrubberyCreationForm &src);
+std::ostream	&operator<<(std::ostream &out, const ShrubberyCreationForm &form);
 
 #endif

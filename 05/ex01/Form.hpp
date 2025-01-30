@@ -9,37 +9,38 @@ class	Bureaucrat;
 
 class	Form
 {
+public:
+	Form(void);
+	Form(const std::string &name, int grade_sign, int grade_exe);
+	Form(const Form &other);
+	~Form(void);
+	Form	&operator=(const Form &form);
+
+	//Getters
+	std::string	getName(void) const;
+	int	getGradeSign(void) const;
+	int	getGradeExe(void) const;
+	bool	getIsSigned(void) const;
+
+	void	beSigned(const Bureaucrat &bureaucrat);
+
+	class	GradeTooHighException: public std::exception
+	{
 	public:
-		Form(const std::string &name, int grade_sign = 150, int grade_exe = 150);
-		Form(const Form &src);
-		~Form();
-		Form	&operator=(const Form &form);
+		const char	*what(void) const throw();
+	};
 
-		//Getters
-		std::string	getName(void) const;
-		int	getGradeSign(void) const;
-		int	getGradeExe(void) const;
-		bool	getIsSigned(void) const;
+	class	GradeTooLowException: public std::exception
+	{
+	public:
+		const char	*what(void) const throw();
+	};
 
-		void	beSigned(const Bureaucrat &bureaucrat);
-
-		class	GradeTooHighException: public std::exception
-		{
-			public:
-				const char	*what(void) const throw();
-		};
-
-		class	GradeTooLowException: public std::exception
-		{
-			public:
-				const char	*what(void) const throw();
-		};
-
-	private:
-		const std::string	_name;
-		const int	_grade_sign;
-		const int	_grade_exe;
-		bool	_is_signed;
+private:
+	const std::string	_name;
+	const int		_grade_sign;
+	const int		_grade_exe;
+	bool			_is_signed;
 		
 
 };

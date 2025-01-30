@@ -5,16 +5,18 @@
 
 Intern::Intern(void)
 {
-	std::cout << "Intern Constructor Called" << std::endl;
+	std::cout << "Intern Default Constructor Called" << std::endl;
 }
 
 Intern::Intern(const Intern &src)
 {
+	std::cout << "Intern Copy Constructor Called" << std::endl;
 	(void)src;
 }
 
 Intern	&Intern::operator=(const Intern &src)
 {
+	std::cout << "Intern Copy Operator Called" << std::endl;
 	(void)src;
 	return (*this);
 }
@@ -24,29 +26,27 @@ Intern::~Intern(void)
 	std::cout << "Intern Destructor Called" << std::endl;
 }
 
-AForm	*Intern::makeForm(const std::string &nameForm, const std::string &target) const
+AForm	*Intern::makeForm(const std::string &name, const std::string &target) const
 {
 	AForm	*form;
-	int	type;
 
-	type = checkFormType(nameForm);
 	form = nullptr;
-	if (type == 0)
+	if (name == "shrubbery creation")
+	{
+		std::cout << "Intern creates ShurubberyCreationForm." << std::endl;
 		form = new ShrubberyCreationForm(target);
-	else if (type == 1)
+	}
+	else if (name == "robotomy request")
+	{
+		std::cout << "Intern creates RobotomyRequestForm." << std::endl;
 		form = new RobotomyRequestForm(target);
-	else if (type == 2)
+	}
+	else if (name == "presidential pardon")
+	{
+		std::cout << "Intern creates PersidentialPardonForm." << std::endl;
 		form = new PresidentialPardonForm(target);
-	return (form);
-}
-
-int	Intern::checkFormType(const std::string &nameForm) const
-{
-	if (nameForm == "shrubbery creation")
-		return (0);
-	else if (nameForm == "robotomy request")
-		return (1);
-	else if (nameForm == "presidential pardon")
-		return (2);
-	return (-1);
+	}
+	else
+		std::cout << "Intern doesn't create any Form." << std::endl;
+	return form;
 }

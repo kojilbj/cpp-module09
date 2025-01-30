@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
 
 #include "AForm.hpp"
 
@@ -7,10 +8,11 @@ class	AForm;
 class	PresidentialPardonForm: public AForm
 {
 	public:
+		PresidentialPardonForm(void);
 		PresidentialPardonForm(const std::string &target);
 		PresidentialPardonForm(const PresidentialPardonForm &src);
 
-		PresidentialPardonForm	&operator=(const PresidentialPardonForm	&src);
+		PresidentialPardonForm	&operator=(const PresidentialPardonForm	&other);
 		~PresidentialPardonForm(void);
 
 		std::string	getTarget(void) const;
@@ -20,4 +22,4 @@ class	PresidentialPardonForm: public AForm
 		const std::string	_target;
 };
 
-std::ostream	&operator<<(std::ostream &out, const PresidentialPardonForm &src);
+#endif

@@ -1,5 +1,10 @@
 #include "RobotomyRequestForm.hpp"
 
+RobotomyRequestForm::RobotomyRequestForm(void): AForm("RobotomyRequestForm", 72, 45), _target("default")
+{
+	std::cout << "RobotomyRequestForm Default Constructor Called" << std::endl;
+}
+
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target): AForm("RobotomyRequestForm", 72, 45), _target(target)
 {
 	std::cout << "RobotomyRequestForm Constructor Called" << std::endl;
@@ -7,6 +12,7 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string &target): AForm("Robo
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src): AForm("RobotomyRequestForm", 72, 45), _target(src.getTarget())
 {
+	std::cout << "RobotomyRequestForm Copy Constructor Called" << std::endl;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(void)
@@ -14,22 +20,17 @@ RobotomyRequestForm::~RobotomyRequestForm(void)
 	std::cout << "RobotomyRequestForm Destructor Called" << std::endl;
 }
 
+RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &other)
+{
+	std::cout << "RobotomyRequestForm Copy Operator Called" << std::endl;
+	if (this == &other)
+		return *this;
+	return *this;
+}
+
 std::string	RobotomyRequestForm::getTarget(void) const
 {
-	return (this->_target);
-}
-
-RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &src)
-{
-	if (this == &src)
-		return (*this);
-	return (*this);
-}
-
-std::ostream	&operator<<(std::ostream &out, const RobotomyRequestForm &src)
-{
-	out << "Form Name: " << src.getName() << ",Grade To Sign: " << src.getGradeSign() << ",Grade To Execute: " << src.getGradeExe() << ",Target: " << src.getTarget();
-	return (out);
+	return this->_target;
 }
 
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
@@ -47,4 +48,18 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 		else
 			std::cout << _target << " has not been robotomized" << std::endl;
 	}
+	else
+	{
+		throw (std::runtime_error(this->getName() + " is not signed."));
+	}
+}
+
+std::ostream	&operator<<(std::ostream &out, const RobotomyRequestForm &form)
+{
+	const AForm *formPtr;
+
+	formPtr = &form;
+	out << *formPtr;
+	out << ", target " << form.getTarget();
+	return out;
 }
