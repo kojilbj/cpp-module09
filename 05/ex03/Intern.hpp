@@ -6,15 +6,18 @@
 
 class	Intern
 {
-	public:
-		Intern(void);
-		Intern(const Intern &src);
+public:
+	Intern(void);
+	Intern(const Intern &src);
 
-		~Intern(void);
+	~Intern(void);
 
-		Intern	&operator=(const Intern &other);
+	Intern	&operator=(const Intern &other);
 
-		AForm	*makeForm(const std::string &name, const std::string &target) const;
+	AForm	*makeForm(const std::string &name, const std::string &target) const;
 
-	private:
+private:
+	AForm	*makeShrubberyCreationForm(const std::string &target) const;
+	AForm	*makeRobotomyRequestForm(const std::string &target) const;
+	AForm	*makePresidentialPardonForm(const std::string &target) const;
 };
