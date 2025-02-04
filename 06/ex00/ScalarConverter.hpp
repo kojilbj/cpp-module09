@@ -8,7 +8,7 @@ class	ScalarConverter
 public:
 	ScalarConverter(void);
 	ScalarConverter(const ScalarConverter &src);
-	~ScalarConverter(void);
+	virtual ~ScalarConverter(void) = 0;
 	ScalarConverter	&operator=(const ScalarConverter &other);
 
 	static void	convert(const std::string &in);
