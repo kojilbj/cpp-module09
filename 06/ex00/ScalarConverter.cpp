@@ -61,19 +61,19 @@ void	ScalarConverter::ConvertViaChar(const std::string &str)
 	ss << str;
 	ss >> c;
 
-	PrintChar(c);
+	PrintChar(c, ss.fail());
 	std::cout << std::endl;
 	
 	i = static_cast<int>(c);
-	PrintInt(i);
+	PrintInt(i, ss.fail());
 	std::cout << std::endl;
 
 	f = static_cast<float>(c);
-	PrintFloat(f);
+	PrintFloat(f, ss.fail());
 	std::cout << std::endl;
 
 	d = static_cast<double>(c);
-	PrintDouble(d);
+	PrintDouble(d, ss.fail());
 	std::cout << std::endl;
 }
 
@@ -89,18 +89,18 @@ void	ScalarConverter::ConvertViaInt(const std::string &str)
 	ss >> i;
 
 	c = static_cast<char>(i);
-	PrintChar(c);
+	PrintChar(c, ss.fail());
 	std::cout << std::endl;
 
-	PrintInt(i);
+	PrintInt(i, ss.fail());
 	std::cout << std::endl;
 
 	f = static_cast<float>(i);
-	PrintFloat(f);
+	PrintFloat(f, ss.fail());
 	std::cout << std::endl;
 
 	d = static_cast<double>(i);
-	PrintDouble(d);
+	PrintDouble(d, ss.fail());
 	std::cout << std::endl;
 }
 void	ScalarConverter::ConvertViaFloat(const std::string &str)
@@ -111,22 +111,29 @@ void	ScalarConverter::ConvertViaFloat(const std::string &str)
 	double	d = 0;
 	std::stringstream ss(str);
 
-	ss << str;
-	ss >> f;
+	if (str == "+inff")
+		f = std::numeric_limits<float>::max();
+	else if (str == "-inff")
+		f = - std::numeric_limits<float>::max();
+	else
+	{
+		ss << str;
+		ss >> f;
+	}
 
 	c = static_cast<char>(f);
-	PrintChar(c);
+	PrintChar(c, ss.fail() || str == "nanf");
 	std::cout << std::endl;
 
 	i = static_cast<int>(f);
-	PrintInt(i);
+	PrintInt(i, ss.fail() || str == "nanf");
 	std::cout << std::endl;
 
-	PrintFloat(f);
+	PrintFloat(f, ss.fail());
 	std::cout << std::endl;
 
 	d = static_cast<double>(f);
-	PrintDouble(d);
+	PrintDouble(d, ss.fail());
 	std::cout << std::endl;
 }
 void	ScalarConverter::ConvertViaDouble(const std::string &str)
@@ -137,22 +144,29 @@ void	ScalarConverter::ConvertViaDouble(const std::string &str)
 	double	d = 0;
 	std::stringstream ss(str);
 
-	ss << str;
-	ss >> d;
+	if (str == "+inf")
+		d = std::numeric_limits<double>::max();
+	else if (str == "-inf")
+		d = - std::numeric_limits<double>::max();
+	else
+	{
+		ss << str;
+		ss >> d;
+	}
 
 	c = static_cast<char>(d);
-	PrintChar(c);
+	PrintChar(c, ss.fail() || str == "nan");
 	std::cout << std::endl;
 
 	i = static_cast<int>(d);
-	PrintInt(i);
+	PrintInt(i, ss.fail() || str == "nan");
 	std::cout << std::endl;
 
 	f = static_cast<double>(d);
-	PrintFloat(f);
+	PrintFloat(f, ss.fail());
 	std::cout << std::endl;
 
-	PrintDouble(d);
+	PrintDouble(d, ss.fail());
 	std::cout << std::endl;
 }
 
@@ -166,7 +180,7 @@ void	ScalarConverter::PrintChar(char c, bool isError)
 	}
 	if (!std::isprint(c))
 	{
-		std::cout << "undisplable";
+		std::cout << "Not displable";
 		return ;
 	}
 	else
@@ -190,7 +204,12 @@ void	ScalarConverter::PrintFloat(float f, bool isError)
 	float	min = - std::numeric_limits<float>::max();
 
 	std::cout << "float: ";
-	if (isError)
+	if (f == 0.0f && isError)
+	{
+		std::cout << "nanf";
+		return ;
+	}
+	else if (isError)
 	{
 		std::cout << "impossible";
 		return ;
@@ -214,7 +233,12 @@ void	ScalarConverter::PrintDouble(double d, bool isError)
 	float	min = - std::numeric_limits<double>::max();
 
 	std::cout << "double: ";
-	if (isError)
+	if (d == 0.0f && isError)
+	{
+		std::cout << "nan";
+		return ;
+	}
+	else if (isError)
 	{
 		std::cout << "impossible";
 		return ;
@@ -252,6 +276,13 @@ void	ScalarConverter::convert(const std::string &str)
 			ConvertViaDouble(str);
 			break ;
 		default:
-			std::cout << "default" << std::endl;
+			PrintChar(1, true);
+			std::cout << std::endl;
+			PrintInt(1, true);
+			std::cout << std::endl;
+			PrintFloat(1.0f, true);
+			std::cout << std::endl;
+			PrintDouble(1, true);
+			std::cout << std::endl;
 	}
 }
