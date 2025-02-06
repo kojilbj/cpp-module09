@@ -20,7 +20,7 @@ int	main(void)
 	}
 	try
 	{
-		::easyfind(container, 9);
+		std::cout << *(::easyfind(container, 9)) << std::endl;
 	}
 	catch (const std::exception &e)
 	{
