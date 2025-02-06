@@ -46,7 +46,7 @@ public:
 	{
 		if (index >= this->size())
 		{
-			throw std::out_of_range("index is out of array");
+			throw std::exception();
 		}
 		return this->arrayPtr_[index];
 	}
