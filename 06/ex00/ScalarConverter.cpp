@@ -1,6 +1,7 @@
-#include "ScalarConverter.hpp"
-
 #include <iostream>
+#include <sstream>
+
+#include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter(void)
 {
@@ -24,155 +25,144 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &other)
 	return *this;
 }
 
-void	ScalarConverter::ConvertToChar(const std::string &in)
-{
-	int	c;
-	int	max;
-	int	min;
+#define CHAR 1
+#define INT 2
+#define DOUBLE 3
+#define FLOAT 4
 
-	max = std::numeric_limits<char>::max();
-	min = std::numeric_limits<char>::min();
-	std::cout << "char: " ;
-	try
-	{
-		c = std::stoi(in);
-	}
-	catch (const std::invalid_argument &e)
-	{
-		std::cout << "nan";
-		return ;
-	}
-	catch (const std::out_of_range &e)
-	{
-		std::cout << "impossible";
-		return ;
-	}
-	if (max == c)
-		std::cout << "+inf";
-	else if (min == c)
-		std::cout << "-inf";
-	else if (c > max || c < min)
-		std::cout << "impossible";
-	else if (std::isprint(c))
-		std::cout << c;
-	else
-		std::cout << "Non displayable";
-	return ;
+int	ScalarConverter::detectType(const std::string &str)
+{
+	if (str == "+inf" || str == "-inf" || str == "nan")
+		return DOUBLE;
+	if (str == "+inff" || str == "-inff" || str == "nanf")
+		return FLOAT;
+	if (str.size() == 1 && !std::isdigit(str[0]))
+		return CHAR;
+	else if (!std::isdigit(str[0]))
+		return 0;
+	else if (str.find('f') == std::string::npos && str.find('.') == std::string::npos)
+		return INT;
+	else if (str.find('f') != std::string::npos)
+		return FLOAT;
+	else if (str.find('.') != std::string::npos)
+		return DOUBLE;
+	return 0;
 }
 
-void	ScalarConverter::ConvertToInt(const std::string &in)
+void	ScalarConverter::ConvertViaChar(const std::string &str)
 {
-	int	i;
-	int	max;
-	int	min;
+	char	c = 0;
+	int	i = 0;
+	float	f = 0;
+	double	d = 0;
 
-	max = std::numeric_limits<int>::max();
-	min = std::numeric_limits<int>::min();
-	std::cout << "int: " ;
-	try
-	{
-		i = std::stoi(in);
-	}
-	catch (const std::invalid_argument &e)
-	{
-		std::cout << "nan";
-		return ;
-	}
-	catch (const std::out_of_range &e)
-	{
-		std::cout << "impossible";
-		return ;
-	}
-	if (max == i)
-		std::cout << "+inf";
-	else if (min == i)
-		std::cout << "-inf";
-	else if (i > max || i < min)
-		std::cout << "impossible";
-	else
-		std::cout << i;
-	return ;
+	std::stringstream ss;
+
+	ss << str;
+	ss >> c;
+
+	std::cout << "char: '" << c << "'" << std::endl;
+
+	i = static_cast<int>(c);
+	std::cout << "int: " << i << std::endl;
+
+	f = static_cast<float>(c);
+	std::cout << "float: " << f << "f" << std::endl;
+
+	d = static_cast<double>(c);
+	std::cout << "double: " << d << std::endl;
 }
 
-void	ScalarConverter::ConvertToFloat(const std::string &in)
+void	ScalarConverter::ConvertViaInt(const std::string &str)
 {
-	float	f;
-	float	max;
-	float	min;
+	char	c = 0;
+	int	i = 0;
+	float	f = 0;
+	double	d = 0;
+	std::stringstream ss;
 
-	max = std::numeric_limits<float>::max();
-	min = std::numeric_limits<float>::lowest();
-	std::cout << "float: " ;
-	try
-	{
-		f = std::stof(in);
-	}
-	catch (const std::invalid_argument &e)
-	{
-		std::cout << "nanf";
-		return ;
-	}
-	catch (const std::out_of_range &e)
-	{
-		std::cout << "impossible";
-		return ;
-	}
-	if (max == f)
-		std::cout << "+inff";
-	else if (min == f)
-		std::cout << "-inff";
-	else if (f > max || f < min)
-		std::cout << "impossible";
-	else
-		std::cout << f << "f";
-	return ;
+	ss << str;
+	ss >> i;
+
+	c = static_cast<char>(i);
+	std::cout << "char: '" << c << "'" << std::endl;
+
+	std::cout << "int: " << i << std::endl;
+
+	f = static_cast<float>(i);
+	std::cout << "float: " << f << "f" << std::endl;
+
+	d = static_cast<double>(i);
+	std::cout << "double: " << d << std::endl;
 }
-
-void	ScalarConverter::ConvertToDouble(const std::string &in)
+void	ScalarConverter::ConvertViaFloat(const std::string &str)
 {
-	double	d;
-	double	max;
-	double	min;
+	char	c = 0;
+	int	i = 0;
+	float	f = 0;
+	double	d = 0;
+	std::stringstream ss(str);
 
-	max = std::numeric_limits<double>::max();
-	min = std::numeric_limits<double>::lowest();
-	std::cout << "double: " ;
-	try
-	{
-		d = std::stod(in);
-	}
-	catch (const std::invalid_argument &e)
-	{
-		std::cout << "nan";
-		return ;
-	}
-	catch (const std::out_of_range &e)
-	{
-		std::cout << "impossible";
-		return ;
-	}
-	if (max == d)
-		std::cout << "+inf";
-	else if (min == d)
-		std::cout << "-inf";
-	else if (d > max || d < min)
-		std::cout << "impossible";
-	else
-		std::cout << d;
-	return ;
+	ss << str;
+	ss >> f;
+
+	c = static_cast<char>(f);
+	std::cout << "char: '" << c << "'" << std::endl;
+
+	i = static_cast<int>(f);
+	std::cout << "int: " << i << std::endl;
+
+	std::cout << "float: " << f << "f" << std::endl;
+
+	d = static_cast<double>(f);
+	std::cout << "double: " << d << std::endl;
 }
-
-void	ScalarConverter::convert(const std::string &in)
+void	ScalarConverter::ConvertViaDouble(const std::string &str)
 {
-	ConvertToChar(in);
-	std::cout << std::endl;
+	char	c = 0;
+	int	i = 0;
+	float	f = 0;
+	double	d = 0;
+	std::stringstream ss(str);
 
-	ConvertToInt(in);
-	std::cout << std::endl;
+	ss << str;
+	ss >> d;
 
-	ConvertToFloat(in);
-	std::cout << std::endl;
+	c = static_cast<char>(d);
+	std::cout << "char: '" << c << "'" << std::endl;
 
-	ConvertToDouble(in);
-	std::cout << std::endl;
+	i = static_cast<int>(d);
+	std::cout << "int: " << i << std::endl;
+
+	f = static_cast<double>(d);
+	std::cout << "float: " << f << "f" << std::endl;
+
+	std::cout << "double: " << d << std::endl;
+}
+void	ScalarConverter::convert(const std::string &str)
+{
+	int	type;
+
+	type = detectType(str);
+	switch (type)
+	{
+		case (CHAR):
+			std::cout << "char" << std::endl;
+			ConvertViaChar(str);
+			break ;
+		case (INT):
+			std::cout << "int" << std::endl;
+			ConvertViaInt(str);
+			break ;
+		case (FLOAT):
+			std::cout << "float" << std::endl;
+			ConvertViaFloat(str);
+			break ;
+		case (DOUBLE):
+			std::cout << "double" << std::endl;
+			ConvertViaDouble(str);
+			break ;
+		default:
+			std::cout << "default" << std::endl;
+	}
 }

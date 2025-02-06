@@ -13,10 +13,12 @@ public:
 
 	static void	convert(const std::string &in);
 private:
-	static void	ConvertToChar(const std::string &in);
-	static void	ConvertToInt(const std::string &in);
-	static void	ConvertToFloat(const std::string &in);
-	static void	ConvertToDouble(const std::string &in);
+	static int	detectType(const std::string &str);
+
+	static void	ConvertViaChar(const std::string &str);
+	static void	ConvertViaInt(const std::string &str);
+	static void	ConvertViaFloat(const std::string &str);
+	static void	ConvertViaDouble(const std::string &str);
 
 };
 #endif
