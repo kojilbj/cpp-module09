@@ -61,16 +61,20 @@ void	ScalarConverter::ConvertViaChar(const std::string &str)
 	ss << str;
 	ss >> c;
 
-	std::cout << "char: '" << c << "'" << std::endl;
-
+	PrintChar(c);
+	std::cout << std::endl;
+	
 	i = static_cast<int>(c);
-	std::cout << "int: " << i << std::endl;
+	PrintInt(i);
+	std::cout << std::endl;
 
 	f = static_cast<float>(c);
-	std::cout << "float: " << f << "f" << std::endl;
+	PrintFloat(f);
+	std::cout << std::endl;
 
 	d = static_cast<double>(c);
-	std::cout << "double: " << d << std::endl;
+	PrintDouble(d);
+	std::cout << std::endl;
 }
 
 void	ScalarConverter::ConvertViaInt(const std::string &str)
@@ -85,15 +89,19 @@ void	ScalarConverter::ConvertViaInt(const std::string &str)
 	ss >> i;
 
 	c = static_cast<char>(i);
-	std::cout << "char: '" << c << "'" << std::endl;
+	PrintChar(c);
+	std::cout << std::endl;
 
-	std::cout << "int: " << i << std::endl;
+	PrintInt(i);
+	std::cout << std::endl;
 
 	f = static_cast<float>(i);
-	std::cout << "float: " << f << "f" << std::endl;
+	PrintFloat(f);
+	std::cout << std::endl;
 
 	d = static_cast<double>(i);
-	std::cout << "double: " << d << std::endl;
+	PrintDouble(d);
+	std::cout << std::endl;
 }
 void	ScalarConverter::ConvertViaFloat(const std::string &str)
 {
@@ -107,15 +115,19 @@ void	ScalarConverter::ConvertViaFloat(const std::string &str)
 	ss >> f;
 
 	c = static_cast<char>(f);
-	std::cout << "char: '" << c << "'" << std::endl;
+	PrintChar(c);
+	std::cout << std::endl;
 
 	i = static_cast<int>(f);
-	std::cout << "int: " << i << std::endl;
+	PrintInt(i);
+	std::cout << std::endl;
 
-	std::cout << "float: " << f << "f" << std::endl;
+	PrintFloat(f);
+	std::cout << std::endl;
 
 	d = static_cast<double>(f);
-	std::cout << "double: " << d << std::endl;
+	PrintDouble(d);
+	std::cout << std::endl;
 }
 void	ScalarConverter::ConvertViaDouble(const std::string &str)
 {
@@ -129,16 +141,97 @@ void	ScalarConverter::ConvertViaDouble(const std::string &str)
 	ss >> d;
 
 	c = static_cast<char>(d);
-	std::cout << "char: '" << c << "'" << std::endl;
+	PrintChar(c);
+	std::cout << std::endl;
 
 	i = static_cast<int>(d);
-	std::cout << "int: " << i << std::endl;
+	PrintInt(i);
+	std::cout << std::endl;
 
 	f = static_cast<double>(d);
-	std::cout << "float: " << f << "f" << std::endl;
+	PrintFloat(f);
+	std::cout << std::endl;
 
-	std::cout << "double: " << d << std::endl;
+	PrintDouble(d);
+	std::cout << std::endl;
 }
+
+void	ScalarConverter::PrintChar(char c, bool isError)
+{
+	std::cout << "char: ";
+	if (isError)
+	{
+		std::cout << "impossible";
+		return ;
+	}
+	if (!std::isprint(c))
+	{
+		std::cout << "undisplable";
+		return ;
+	}
+	else
+		std::cout << "'" << c << "'";
+}
+
+void	ScalarConverter::PrintInt(int i, bool isError)
+{
+	std::cout << "int: ";
+	if (isError)
+	{
+		std::cout << "impossible";
+		return ;
+	}
+	std::cout << i;
+}
+
+void	ScalarConverter::PrintFloat(float f, bool isError)
+{
+	float	max = std::numeric_limits<float>::max();
+	float	min = - std::numeric_limits<float>::max();
+
+	std::cout << "float: ";
+	if (isError)
+	{
+		std::cout << "impossible";
+		return ;
+	}
+	else if (f == max)
+	{
+		std::cout << "+inff";
+		return ;
+	}
+	else if (f == min)
+	{
+		std::cout << "-inff";
+		return ;
+	}
+	std::cout << f << "f";
+}
+
+void	ScalarConverter::PrintDouble(double d, bool isError)
+{
+	float	max = std::numeric_limits<double>::max();
+	float	min = - std::numeric_limits<double>::max();
+
+	std::cout << "double: ";
+	if (isError)
+	{
+		std::cout << "impossible";
+		return ;
+	}
+	else if (d == max)
+	{
+		std::cout << "+inf";
+		return ;
+	}
+	else if (d == min)
+	{
+		std::cout << "-inf";
+		return ;
+	}
+	std::cout << d;
+}
+
 void	ScalarConverter::convert(const std::string &str)
 {
 	int	type;
@@ -147,19 +240,15 @@ void	ScalarConverter::convert(const std::string &str)
 	switch (type)
 	{
 		case (CHAR):
-			std::cout << "char" << std::endl;
 			ConvertViaChar(str);
 			break ;
 		case (INT):
-			std::cout << "int" << std::endl;
 			ConvertViaInt(str);
 			break ;
 		case (FLOAT):
-			std::cout << "float" << std::endl;
 			ConvertViaFloat(str);
 			break ;
 		case (DOUBLE):
-			std::cout << "double" << std::endl;
 			ConvertViaDouble(str);
 			break ;
 		default:

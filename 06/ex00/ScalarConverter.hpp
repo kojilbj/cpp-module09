@@ -2,6 +2,7 @@
 #define SCALARCONVERTER_HPP
 
 #include <string>
+#include <limits>
 
 class	ScalarConverter
 {
@@ -19,6 +20,11 @@ private:
 	static void	ConvertViaInt(const std::string &str);
 	static void	ConvertViaFloat(const std::string &str);
 	static void	ConvertViaDouble(const std::string &str);
+
+	static void	PrintChar(char c, bool isError = false);
+	static void	PrintInt(int i, bool isError = false);
+	static void	PrintFloat(float f, bool isError = false);
+	static void	PrintDouble(double d, bool isError = false);
 
 };
 #endif
