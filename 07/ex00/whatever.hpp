@@ -23,10 +23,10 @@ T	max(const T &a, const T &b)
 template <class T>
 T	min(const T &a, const T &b)
 {
-	if (a >= b)
-		return b;
-	else
+	if (a < b)
 		return a;
+	else
+		return b;
 }
 
 #endif

@@ -11,14 +11,16 @@ public:
 	{
 	}
 
-	Array(unsigned int n) : arrayPtr_(new T[n]()), size_(n)
+	Array(unsigned int n) : size_(n)
 	{
+		this->arrayPtr_ = new T[size_];
 	}
 
 	Array(const Array &src)
 	{
-		this->arrayPtr_ = new T[src.size()]();
-		for (size_t i = 0; i < src.size(); i++)
+		this->size_ = src.size();
+		this->arrayPtr_ = new T[size_];
+		for (size_t i = 0; i < size_; i++)
 		{
 			this->arrayPtr_[i] = src.arrayPtr_[i];
 		}
@@ -33,9 +35,10 @@ public:
 	{
 		if (this == &other)
 			return *this;
-		this->arrayPtr_ = new T[other.size()];
+		delete[] this->arrayPtr_;
 		this->size_ = other.size();
-		for (size_t i = 0; i < other.size(); i++)
+		this->arrayPtr_ = new T[size_];
+		for (size_t i = 0; i < size_; i++)
 		{
 			this->arrayPtr_[i] = other.arrayPtr_[i];
 		}
