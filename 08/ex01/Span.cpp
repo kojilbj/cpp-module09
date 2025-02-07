@@ -1,4 +1,6 @@
 #include <iostream>
+#include <algorithm>
+#include <numeric>
 #include <string>
 
 #include "Span.hpp"
@@ -32,12 +34,41 @@ void	Span::addNumber(int n)
 	numbers_.push_back(n);
 }
 
+bool	isNonZero(int i)
+{
+	return i != 0;
+}
+
 int	Span::shortestSpan()
 {
-	return 0;
+	int	span = 0;
+	std::vector<int>	diffs(numbers_.size());
+	std::vector<int>::const_iterator	it;
+
+	if (numbers_.size() == 0)
+		throw std::out_of_range("container is empty.");
+	if (numbers_.size() == 1)
+		throw std::logic_error("container has only one element");
+	std::sort(numbers_.begin(), numbers_.end());
+	std::adjacent_difference(numbers_.begin(), numbers_.end(), diffs.begin());
+	it = std::find_if(diffs.begin() + 1, diffs.end(), isNonZero);
+	if (it == diffs.end())
+		throw std::logic_error("no span");
+	span = *std::min_element(diffs.begin(), diffs.end());
+	return span;
 }
 
 int	Span::longestSpan()
 {
-	return 0;
+	int	span;
+
+	if (numbers_.size() == 0)
+		throw std::out_of_range("container is empty.");
+	if (numbers_.size() == 1)
+		throw std::logic_error("container has only one element");
+	std::sort(numbers_.begin(), numbers_.end());
+	span = *(numbers_.end() - 1) - *numbers_.begin();
+	if (span == 0)
+		throw std::logic_error("no span");
+	return span;
 }
