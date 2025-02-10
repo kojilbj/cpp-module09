@@ -7,22 +7,32 @@ template <typename T>
 class MutantStack: public std::stack<T>
 {
 public:
+	typedef typename std::deque<T>::iterator	iterator;
+
 	MutantStack()
 	{
 	}
 
-	MutantStack(const MutantStack &src)
+	MutantStack(const MutantStack &src) : std::stack<T>(src)
 	{
+	}
+
+	MutantStack	&operator=(const MutantStack& other)
+	{
+		if (this == &other)
+			return *this;
+		this->c = other.c;
+		return *this;
 	}
 
 	~MutantStack(){}
 
-	typename MutantStack<T>::iterator	begin()
+	typename std::deque<T>::iterator	begin()
 	{
 		return this->c.begin();
 	}
 
-	typename MutantStack<T>::iterator	end()
+	typename std::deque<T>::iterator	end()
 	{
 		return this->c.end();
 	}
