@@ -27,12 +27,12 @@ time_t	ExchangeRate::ConvertToTime(const std::string &date)
 {
 	char	deli = '-';
 	std::stringstream	ss(date);
-	std::tm	tm = {};
+	tm	tm = {};
 
 	ss >> tm.tm_year >> deli >> tm.tm_mon >> deli >> tm.tm_mday;
 	tm.tm_year = tm.tm_year - 1900;
 	tm.tm_mon = tm.tm_mon - 1;
-	return std::mktime(&tm);
+	return mktime(&tm);
 }
 
 std::string	ExchangeRate::getDateString() const

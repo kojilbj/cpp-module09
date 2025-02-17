@@ -5,12 +5,13 @@ NAME=RPN
 OBJS=$(SRCS:.cpp=.o)
 INCLUDEDIR=-Iinclude
 
-all:$(NAME)
+all: $(NAME)
 
-$(NAME):$(OBJS)
+$(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
-%.o:%.cpp
+
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:

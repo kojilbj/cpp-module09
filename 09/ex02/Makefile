@@ -1,7 +1,7 @@
 CXX=c++
 CXXFLAGS=-Wall -Wextra -Werror -std=c++98 $(INCLUDEDIR)
-SRCS=./src/main.cpp ./src/RPN.cpp
-NAME=RPN
+SRCS=./src/main.cpp ./src/PmergeMe.cpp
+NAME=PmergeMe
 OBJS=$(SRCS:.cpp=.o)
 INCLUDEDIR=-Iinclude
 

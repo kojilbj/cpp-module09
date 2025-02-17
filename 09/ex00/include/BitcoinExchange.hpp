@@ -1,6 +1,8 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
+#include <vector>
+
 #include <string>
 #include "Fixed.hpp"
 #include "ExchangeRate.hpp"

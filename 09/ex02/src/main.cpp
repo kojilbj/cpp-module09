@@ -1,18 +1,22 @@
 #include <iostream>
 
-#include "RPN.hpp"
+#include "PmergeMe.hpp"
 
-int	main(int ac, char *av[])
+int	main(void)
 {
-	if (ac != 2)
-		return 0;
-	try
+	PmergeMe	pm;
+
+	std::list<int>	list = pm.ListProcess();
+	for (std::list<int>::iterator it = list.begin(); it != list.end(); it++)
 	{
-		std::cout << RPN::Calculate(av[1]) << std::endl;
+		std::cout << *it << " ";
 	}
-	catch (const std::exception &e)
+	std::cout << std::endl;
+
+	std::deque<int>	deque = pm.DequeProcess();
+	for (std::deque<int>::iterator it = deque.begin(); it != deque.end(); it++)
 	{
-		std::cerr << "Error" << std::endl;
+		std::cout << *it << " ";
 	}
-	return 0;
+	std::cout << std::endl;
 }
