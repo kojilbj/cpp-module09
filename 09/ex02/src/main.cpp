@@ -1,22 +1,77 @@
 #include <iostream>
+#include <ctime>
 
 #include "PmergeMe.hpp"
 
-int	main(void)
+
+void	printBefore(char *av[])
 {
-	PmergeMe	pm;
-
-	std::list<int>	list = pm.ListProcess();
-	for (std::list<int>::iterator it = list.begin(); it != list.end(); it++)
-	{
-		std::cout << *it << " ";
-	}
+	std::cout << "Before:";
+	for (size_t i = 0; av[i] != NULL; i++)
+		std::cout << " " << av[i];
 	std::cout << std::endl;
+}
 
-	std::deque<int>	deque = pm.DequeProcess();
-	for (std::deque<int>::iterator it = deque.begin(); it != deque.end(); it++)
+void	printAfter(char *av[])
+{
+	std::cout << "After: ";
+	PmergeMe::print(PmergeMe::DequeProcess(av));
+}
+
+void	printListRange(char *av[])
+{
+	size_t	i;
+
+	std::cout << "Time to process a range of ";
+	for (i = 0; av[i] != NULL; i++)
+		;
+	std::cout << i << " elements with std::list";
+
+}
+
+void	printDequeRange(char *av[])
+{
+	size_t	i;
+
+	std::cout << "Time to process a range of ";
+	for (i = 0; av[i] != NULL; i++)
+		;
+	std::cout << i << " elements with std::deque";
+}
+
+void	printTime(clock_t start, clock_t end)
+{
+	double duration;
+
+	duration = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	std::cout << " : " << duration << " us" << std::endl;
+}
+
+int	main(int ac, char *argv[])
+{
+	clock_t	start;
+	clock_t	end;
+
+	if (ac < 2)
 	{
-		std::cout << *it << " ";
+		std::cerr << "Error" << std::endl;
+		return 0;
 	}
-	std::cout << std::endl;
+	//TO DO マイナスが来た時の判定
+	printBefore(&argv[1]);
+	printAfter(&argv[1]);
+
+	printListRange(&argv[1]);
+
+	start = clock();
+	std::list<int>	list = PmergeMe::ListProcess(&argv[0]);
+	end = clock();
+	printTime(start, end);
+
+	printDequeRange(&argv[1]);
+
+	start = clock();
+	std::deque<int>	deque = PmergeMe::DequeProcess(&argv[1]);
+	end = clock();
+	printTime(start, end);
 }

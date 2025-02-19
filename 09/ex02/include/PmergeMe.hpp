@@ -11,11 +11,22 @@ public:
 	PmergeMe(const PmergeMe &);
 
 	PmergeMe	&operator=(const PmergeMe &);
-	~PmergeMe();
+	virtual ~PmergeMe() = 0;
 
-	std::list<int>	ListProcess();
-	std::deque<int>	DequeProcess();
+	static std::list<int>	ListProcess(char *av[]);
+	static std::deque<int>	DequeProcess(char *av[]);
+
+	template <typename T>
+	static void	print(const T &container)
+	{
+		for (typename T::const_iterator it = container.begin(); it != container.end(); it++) {
+			std::cout << *it << " ";
+		}
+		std::cout << std::endl;
+	}
 private:
+	static void	FordJohnsonSort(std::deque<int> &list);
+	static void	FordJohnsonSort(std::list<int> &deque);
 };
 
 #endif
