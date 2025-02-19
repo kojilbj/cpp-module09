@@ -57,7 +57,14 @@ int	main(int ac, char *argv[])
 		std::cerr << "Error" << std::endl;
 		return 0;
 	}
-	//TO DO マイナスが来た時の判定
+	for (size_t i = 1; argv[i] != NULL; i++)
+	{
+		if (std::atoi(argv[i]) < 0 || !std::isdigit(argv[i][0]))
+		{
+			std::cerr << "Error" << std::endl;
+			return 0;
+		}
+	}
 	printBefore(&argv[1]);
 	printAfter(&argv[1]);
 
