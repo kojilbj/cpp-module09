@@ -3,20 +3,25 @@
 
 int main(void)
 {
-	Span	sp1(5);
-
-	sp1.addNumber(6);
-	sp1.addNumber(3);
-	sp1.addNumber(17);
-	sp1.addNumber(9);
-	sp1.addNumber(11);
-	std::cout << sp1.shortestSpan() << std::endl;
-	std::cout << sp1.longestSpan() << std::endl;
+	// Test Written in Subject 
+	{
+		std::cout << "Test Written in Subject" << std::endl;
+		Span sp = Span(5);
+		sp.addNumber(6);
+		sp.addNumber(3);
+		sp.addNumber(17);
+		sp.addNumber(9);
+		sp.addNumber(11);
+		std::cout << "\t" << sp.shortestSpan() << std::endl;
+		std::cout << "\t" << sp.longestSpan() << std::endl;
+	}
 
 	Span	sp2(10);
 	try
 	{
-		std::cout << sp2.longestSpan() << std::endl;
+		// Only One Element
+		std::cout << "Test Nothing Element longestSpan()" << std::endl;
+		std::cout << "\t" << sp2.longestSpan() << std::endl;
 	}
 	catch (const std::exception &e)
 	{
@@ -24,7 +29,8 @@ int main(void)
 	}
 	try
 	{
-		std::cout << sp2.shortestSpan() << std::endl;
+		std::cout << "Test Nothing Element shortestSpan()" << std::endl;
+		std::cout << "\t" << sp2.shortestSpan() << std::endl;
 	}
 	catch (const std::exception &e)
 	{
@@ -32,8 +38,9 @@ int main(void)
 	}
 	try
 	{
+		std::cout << "Test Only One Element longestSpan()" << std::endl;
 		sp2.addNumber(100);
-		std::cout << sp2.longestSpan() << std::endl;
+		std::cout << "\t" << sp2.longestSpan() << std::endl;
 	}
 	catch (const std::exception &e)
 	{
@@ -41,7 +48,8 @@ int main(void)
 	}
 	try
 	{
-		std::cout << sp2.shortestSpan() << std::endl;
+		std::cout << "Test Only One Element shorteestSpan()" << std::endl;
+		std::cout << "\t" << sp2.shortestSpan() << std::endl;
 	}
 	catch (const std::exception &e)
 	{
@@ -49,8 +57,9 @@ int main(void)
 	}
 	try
 	{
+		std::cout << "Test Same Elements longestSpan()" << std::endl;
 		sp2.addNumber(100);
-		std::cout << sp2.longestSpan() << std::endl;
+		std::cout << "\t" << sp2.longestSpan() << std::endl;
 	}
 	catch (const std::exception &e)
 	{
@@ -58,10 +67,35 @@ int main(void)
 	}
 	try
 	{
-		std::cout << sp2.shortestSpan() << std::endl;
+		std::cout << "Test Same Elements shortestSpan()" << std::endl;
+		std::cout << "\t" << sp2.shortestSpan() << std::endl;
 	}
 	catch (const std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+
+	{
+		std::cout << "Advanced Test" << std::endl;
+		Span sp(5);
+		sp.addRandomNumber();
+		sp.printElements();
+		try
+		{
+			std::cout << "\tlongetSpan: " << sp.longestSpan() << std::endl;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		try
+		{
+			std::cout << "\tshortestSpan: " << sp.shortestSpan() << std::endl;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+	return 0;
 }
