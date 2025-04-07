@@ -3,21 +3,22 @@
 
 #include <stack>
 
-template <typename T>
-class MutantStack: public std::stack<T>
+template <typename T, typename Container = std::deque<T> >
+class MutantStack : public std::stack<T, Container>
 {
 public:
-	typedef typename std::deque<T>::iterator	iterator;
+	typedef typename Container::iterator iterator;
+	typedef typename Container::const_iterator const_iterator;
 
 	MutantStack()
-	{
-	}
+		: std::stack<T, Container>()
+	{ }
 
-	MutantStack(const MutantStack &src) : std::stack<T>(src)
-	{
-	}
+	MutantStack(const MutantStack& src)
+		: std::stack<T, Container>(src)
+	{ }
 
-	MutantStack	&operator=(const MutantStack& other)
+	MutantStack& operator=(const MutantStack& other)
 	{
 		if (this == &other)
 			return *this;
@@ -25,22 +26,29 @@ public:
 		return *this;
 	}
 
-	~MutantStack(){}
+	~MutantStack() { }
 
-	typename std::deque<T>::iterator	begin()
+	iterator begin()
 	{
 		return this->c.begin();
 	}
 
-	typename std::deque<T>::iterator	end()
+	iterator end()
 	{
 		return this->c.end();
 	}
 
+	const_iterator begin() const
+	{
+		return this->c.begin();
+	}
+
+	const_iterator end() const
+	{
+		return this->c.end();
+	}
 
 private:
-
 };
 
 #endif
-
