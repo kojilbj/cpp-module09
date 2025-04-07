@@ -9,9 +9,9 @@ int main()
 		MutantStack<int> mstack;
 		mstack.push(5);
 		mstack.push(17);
-		std::cout << mstack.top() << std::endl;
+		std::cout << "\t" << mstack.top() << std::endl;
 		mstack.pop();
-		std::cout << mstack.size() << std::endl;
+		std::cout << "\t" << mstack.size() << std::endl;
 		mstack.push(3);
 		mstack.push(5);
 		mstack.push(737);
@@ -23,7 +23,7 @@ int main()
 		--it;
 		while (it != ite)
 		{
-			std::cout << *it << std::endl;
+			std::cout << "\t" << *it << std::endl;
 			++it;
 		}
 		std::stack<int> s(mstack);
@@ -33,9 +33,9 @@ int main()
 		MutantStack<int, std::vector<int> > mstack;
 		mstack.push(5);
 		mstack.push(17);
-		std::cout << mstack.top() << std::endl;
+		std::cout << "\t" << mstack.top() << std::endl;
 		mstack.pop();
-		std::cout << mstack.size() << std::endl;
+		std::cout << "\t" << mstack.size() << std::endl;
 		mstack.push(3);
 		mstack.push(5);
 		mstack.push(737);
@@ -47,10 +47,47 @@ int main()
 		--it;
 		while (it != ite)
 		{
-			std::cout << *it << std::endl;
+			std::cout << "\t" << *it << std::endl;
 			++it;
 		}
 		std::stack<int, std::vector<int> > s(mstack);
+	}
+
+	{
+		std::cout << "Copy Constructor Test" << std::endl;
+		MutantStack<std::string> st1;
+		st1.push("Hello");
+		st1.push("World");
+		MutantStack<std::string> st2(st1);
+		for (MutantStack<std::string>::iterator it = st2.begin(); it != st2.end(); it++)
+		{
+			std::cout << "\t" << *it << std::endl;
+		}
+	}
+
+	{
+		std::cout << "Copy Operator Test" << std::endl;
+		MutantStack<std::string> st1;
+		st1.push("Hello");
+		st1.push("World");
+		MutantStack<std::string> st2;
+		st2 = st1;
+		for (MutantStack<std::string>::iterator it = st2.begin(); it != st2.end(); it++)
+		{
+			std::cout << "\t" << *it << std::endl;
+		}
+	}
+
+	{
+		std::cout << "Const Iteartor Test" << std::endl;
+		MutantStack<std::string> st1;
+		st1.push("Hello");
+		st1.push("World");
+
+		for (MutantStack<std::string>::const_iterator it = st1.begin(); it != st1.end(); it++)
+		{
+			std::cout << "\t" << *it << std::endl;
+		}
 	}
 	return 0;
 }
