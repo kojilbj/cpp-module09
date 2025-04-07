@@ -7,21 +7,22 @@ class Span
 {
 public:
 	Span(unsigned int n);
-	Span(const Span &src);
+	Span(const Span& src);
 
-	Span	&operator=(const Span &other);
+	Span& operator=(const Span& other);
 
 	~Span();
 
-	void	addNumber(int n);
-	void	addRandomNumber();
+	void addNumber(int n);
+	void addRandomNumber();
 
-	int	shortestSpan();
-	int	longestSpan();
+	int shortestSpan();
+	int longestSpan();
 
-	void	printElements();
+	void printElements();
 
 private:
+	Span();
 	std::vector<int> numbers_;
 };
 

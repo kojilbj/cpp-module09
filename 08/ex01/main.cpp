@@ -3,7 +3,26 @@
 
 int main(void)
 {
-	// Test Written in Subject 
+	{
+		std::cout << "Copy Contructor Test" << std::endl;
+		Span sp1 = Span(5);
+		sp1.addNumber(6);
+		sp1.addNumber(3);
+		Span sp2(sp1);
+		sp2.printElements();
+	}
+
+	{
+		std::cout << "Copy Operator Test" << std::endl;
+		Span sp1 = Span(5);
+		sp1.addNumber(6);
+		sp1.addNumber(3);
+		Span sp2(1);
+		sp2 = sp1;
+		sp2.printElements();
+	}
+
+	// Test Written in Subject
 	{
 		std::cout << "Test Written in Subject" << std::endl;
 		Span sp = Span(5);
@@ -16,14 +35,14 @@ int main(void)
 		std::cout << "\t" << sp.longestSpan() << std::endl;
 	}
 
-	Span	sp2(10);
+	Span sp2(10);
 	try
 	{
 		// Only One Element
 		std::cout << "Test Nothing Element longestSpan()" << std::endl;
 		std::cout << "\t" << sp2.longestSpan() << std::endl;
 	}
-	catch (const std::exception &e)
+	catch (const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -32,7 +51,7 @@ int main(void)
 		std::cout << "Test Nothing Element shortestSpan()" << std::endl;
 		std::cout << "\t" << sp2.shortestSpan() << std::endl;
 	}
-	catch (const std::exception &e)
+	catch (const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -42,7 +61,7 @@ int main(void)
 		sp2.addNumber(100);
 		std::cout << "\t" << sp2.longestSpan() << std::endl;
 	}
-	catch (const std::exception &e)
+	catch (const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -51,7 +70,7 @@ int main(void)
 		std::cout << "Test Only One Element shorteestSpan()" << std::endl;
 		std::cout << "\t" << sp2.shortestSpan() << std::endl;
 	}
-	catch (const std::exception &e)
+	catch (const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -61,7 +80,7 @@ int main(void)
 		sp2.addNumber(100);
 		std::cout << "\t" << sp2.longestSpan() << std::endl;
 	}
-	catch (const std::exception &e)
+	catch (const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -70,7 +89,7 @@ int main(void)
 		std::cout << "Test Same Elements shortestSpan()" << std::endl;
 		std::cout << "\t" << sp2.shortestSpan() << std::endl;
 	}
-	catch (const std::exception &e)
+	catch (const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -84,7 +103,7 @@ int main(void)
 		{
 			std::cout << "\tlongetSpan: " << sp.longestSpan() << std::endl;
 		}
-		catch (const std::exception &e)
+		catch (const std::exception& e)
 		{
 			std::cout << e.what() << std::endl;
 		}
@@ -92,7 +111,7 @@ int main(void)
 		{
 			std::cout << "\tshortestSpan: " << sp.shortestSpan() << std::endl;
 		}
-		catch (const std::exception &e)
+		catch (const std::exception& e)
 		{
 			std::cout << e.what() << std::endl;
 		}

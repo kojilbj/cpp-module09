@@ -1,22 +1,27 @@
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <numeric>
-#include <string>
 #include <random>
+#include <string>
 
 #include "Span.hpp"
 
-Span::Span(unsigned int N)
+Span::Span()
 {
-	numbers_.reserve(N);
+	numbers_.reserve(10);
 }
 
-Span::Span(const Span &src)
+Span::Span(unsigned int n)
+{
+	numbers_.reserve(n);
+}
+
+Span::Span(const Span& src)
 {
 	this->numbers_ = src.numbers_;
 }
 
-Span	&Span::operator=(const Span &other)
+Span& Span::operator=(const Span& other)
 {
 	if (this == &other)
 		return *this;
@@ -24,27 +29,25 @@ Span	&Span::operator=(const Span &other)
 	return *this;
 }
 
-Span::~Span()
-{
-}
+Span::~Span() { }
 
-void	Span::addNumber(int n)
+void Span::addNumber(int n)
 {
 	if (numbers_.capacity() == numbers_.size())
 		throw std::out_of_range("over");
 	numbers_.push_back(n);
 }
 
-bool	isNonZero(int i)
+bool isNonZero(int i)
 {
 	return i != 0;
 }
 
-int	Span::shortestSpan()
+int Span::shortestSpan()
 {
-	int	span = 0;
-	std::vector<int>	diffs(numbers_.size());
-	std::vector<int>::const_iterator	it;
+	int span = 0;
+	std::vector<int> diffs(numbers_.size());
+	std::vector<int>::const_iterator it;
 
 	if (numbers_.size() == 0)
 		throw std::out_of_range("container is empty.");
@@ -59,9 +62,9 @@ int	Span::shortestSpan()
 	return span;
 }
 
-int	Span::longestSpan()
+int Span::longestSpan()
 {
-	int	span;
+	int span;
 
 	if (numbers_.size() == 0)
 		throw std::out_of_range("container is empty.");
@@ -74,7 +77,7 @@ int	Span::longestSpan()
 	return span;
 }
 
-void	Span::addRandomNumber()
+void Span::addRandomNumber()
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -86,7 +89,7 @@ void	Span::addRandomNumber()
 		{
 			addNumber(dist(gen));
 		}
-		catch (const std::exception &e)
+		catch (const std::exception& e)
 		{
 			//std::cout << e.what() << std::endl;
 			return;
@@ -94,7 +97,7 @@ void	Span::addRandomNumber()
 	}
 }
 
-void	Span::printElements()
+void Span::printElements()
 {
 	for (std::vector<int>::iterator it = numbers_.begin(); it != numbers_.end(); it++)
 	{
