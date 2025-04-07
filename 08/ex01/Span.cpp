@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <numeric>
 #include <string>
+#include <random>
 
 #include "Span.hpp"
 
@@ -71,4 +72,33 @@ int	Span::longestSpan()
 	if (span == 0)
 		throw std::logic_error("no span");
 	return span;
+}
+
+void	Span::addRandomNumber()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dist(0, 10000);
+
+	while (1)
+	{
+		try
+		{
+			addNumber(dist(gen));
+		}
+		catch (const std::exception &e)
+		{
+			//std::cout << e.what() << std::endl;
+			return;
+		}
+	}
+}
+
+void	Span::printElements()
+{
+	for (std::vector<int>::iterator it = numbers_.begin(); it != numbers_.end(); it++)
+	{
+		std::cout << *it << ", ";
+	}
+	std::cout << std::endl;
 }

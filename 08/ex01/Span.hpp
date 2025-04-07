@@ -14,9 +14,12 @@ public:
 	~Span();
 
 	void	addNumber(int n);
+	void	addRandomNumber();
 
 	int	shortestSpan();
 	int	longestSpan();
+
+	void	printElements();
 
 private:
 	std::vector<int> numbers_;
