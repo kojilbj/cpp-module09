@@ -25,7 +25,15 @@ Span& Span::operator=(const Span& other)
 {
 	if (this == &other)
 		return *this;
-	this->numbers_ = other.numbers_;
+	std::vector<int>::const_iterator otherIt = other.numbers_.begin();
+	this->numbers_.clear();
+	for (size_t i = 0; i < this->numbers_.capacity(); i++)
+	{
+		if (otherIt == other.numbers_.end())
+			break;
+		this->numbers_.push_back(*otherIt);
+		otherIt++;
+	}
 	return *this;
 }
 
@@ -81,7 +89,7 @@ void Span::addRandomNumber()
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dist(0, 10000);
+	std::uniform_int_distribution<> dist(0, 10000000);
 
 	while (1)
 	{

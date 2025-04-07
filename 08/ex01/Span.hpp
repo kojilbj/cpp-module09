@@ -6,14 +6,14 @@
 class Span
 {
 public:
-	Span(unsigned int n);
+	Span(unsigned int N);
 	Span(const Span& src);
 
 	Span& operator=(const Span& other);
 
 	~Span();
 
-	void addNumber(int n);
+	void addNumber(int N);
 	void addRandomNumber();
 
 	int shortestSpan();

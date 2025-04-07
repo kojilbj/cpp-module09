@@ -17,7 +17,10 @@ int main(void)
 		Span sp1 = Span(5);
 		sp1.addNumber(6);
 		sp1.addNumber(3);
-		Span sp2(1);
+		sp1.addNumber(8);
+		Span sp2(2);
+		// sp2.addNumber(10);
+		// sp2.addNumber(2);
 		sp2 = sp1;
 		sp2.printElements();
 	}
@@ -96,9 +99,9 @@ int main(void)
 
 	{
 		std::cout << "Advanced Test" << std::endl;
-		Span sp(5);
+		Span sp(10000);
 		sp.addRandomNumber();
-		sp.printElements();
+		//sp.printElements();
 		try
 		{
 			std::cout << "\tlongetSpan: " << sp.longestSpan() << std::endl;
