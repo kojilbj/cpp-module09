@@ -3,30 +3,29 @@
 
 #include <time.h>
 
-#include "Fixed.hpp"
-
-class	ExchangeRate
+struct ExchangeRate
 {
 public:
-	ExchangeRate(const std::string &date, const Fixed &rate);
-	ExchangeRate(time_t date, const Fixed &rate);
+	ExchangeRate(const std::string& date, float rate);
+	ExchangeRate(time_t date, float rate);
+
+	ExchangeRate(const ExchangeRate& src);
+	ExchangeRate& operator=(const ExchangeRate& other);
 
 	~ExchangeRate();
 
-	std::string getDateString() const;
-	time_t	getDate() const;
-	Fixed getRate() const;
+	time_t getDate() const;
+	float getRate() const;
 
-	static time_t	ConvertToTime(const std::string &date);
+	static time_t convertToTime(const std::string& date);
 
 private:
-	Fixed	rate_;
-	time_t	date_;
-	std::string	dateString_;
+	float rate_;
+	time_t date_;
 
 	ExchangeRate();
 };
 
-std::ostream	&operator<<(std::ostream &out, const ExchangeRate&ex);
+std::ostream& operator<<(std::ostream& out, const ExchangeRate& ex);
 
 #endif

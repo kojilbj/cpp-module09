@@ -3,25 +3,29 @@
 
 #include <vector>
 
-#include <string>
-#include "Fixed.hpp"
 #include "ExchangeRate.hpp"
+#include <string>
 
-class	BitcoinExchange
+class BitcoinExchange
 {
 public:
 	BitcoinExchange();
+	BitcoinExchange(const BitcoinExchange& src);
+
+	BitcoinExchange& operator=(const BitcoinExchange& other);
 	~BitcoinExchange();
 
-	void	ReadRateFile(const std::string &fileName);
-	void	ReadExchangeFile(const std::string &fileName);
+	void readRateFile(const std::string& fileName);
+	void readExchangeFile(const std::string& fileName);
 
-	Fixed	Calculate(const std::string &date, const std::string &price) const;
-	Fixed	findRate(const std::string &date) const;
+	float calculate(const std::string& date, const std::string& price) const;
+	float findRate(const std::string& date) const;
 
 private:
-	std::vector<ExchangeRate>	rateHistory_;
+	std::vector<struct ExchangeRate> rateHistory_;
+
+	void parseLine(const std::string& line, std::string& date, std::string& price) const;
+	float toFloat(const std::string& str) const;
 };
 
 #endif
-

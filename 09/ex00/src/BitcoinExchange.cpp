@@ -1,110 +1,143 @@
+#include "BitcoinExchange.hpp"
+#include <algorithm>
+#include <fstream>
 #include <iostream>
 #include <sstream>
-#include <fstream>
-#include "BitcoinExchange.hpp"
+#include <stdexcept>
 
 BitcoinExchange::BitcoinExchange()
 {
 	//this->ReadRateFile("data.csv");
 }
 
-BitcoinExchange::~BitcoinExchange()
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& src)
+	: rateHistory_(src.rateHistory_)
+{ }
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 {
+	if (this == &other)
+		return *this;
+	this->rateHistory_ = other.rateHistory_;
+	return *this;
 }
 
-void	BitcoinExchange::ReadRateFile(const std::string &fileName)
+BitcoinExchange::~BitcoinExchange() { }
+
+void BitcoinExchange::readRateFile(const std::string& fileName)
 {
-	std::ifstream	file(fileName);
-	std::string	buff;
+	std::ifstream file(fileName);
+	std::string buff;
 
 	if (!file.is_open())
 	{
-		std::cout << "Error: could not open " << fileName << std::endl;
-		return ;
+		throw std::logic_error("Error: could not open " + fileName);
 	}
 	std::getline(file, buff);
 	while (std::getline(file, buff))
 	{
-		std::stringstream	ss(buff);
-		std::string	date;
-		std::string	price;
+		if (std::count(buff.begin(), buff.end(), ',') != 1)
+		{
+			throw std::logic_error("Error: bad input =>" + buff);
+		}
+		std::stringstream ss(buff);
+		std::string date;
+		std::string price;
 
 		std::getline(ss, date, ',');
 		std::getline(ss, price);
-		ExchangeRate	ex(date, std::stof(price));
-
+		struct ExchangeRate ex(date, toFloat(price));
 		rateHistory_.push_back(ex);
 	}
 }
 
-void	BitcoinExchange::ReadExchangeFile(const std::string &fileName)
+void BitcoinExchange::readExchangeFile(const std::string& fileName)
 {
-	std::ifstream	file(fileName);
-	std::string	buff;
+	std::ifstream file(fileName);
+	std::string buff;
 
 	if (!file.is_open())
 	{
-		std::cout << "Error: could not open " << fileName << std::endl;
-		return ;
+		throw std::logic_error("Error: could not open " + fileName);
 	}
 	std::getline(file, buff);
 	while (std::getline(file, buff))
 	{
-		std::stringstream	ss(buff);
-		std::string	date;
-		std::string	price;
-
-		std::getline(ss, date, '|');
-		std::getline(ss, price);
-
+		std::string date;
+		std::string btc;
 		try
 		{
-			Fixed	ex = Calculate(date, price);
-			std::cout << date << " => " << price << " = " << ex << std::endl;
+			parseLine(buff, date, btc);
+			float price = calculate(date, btc);
+			std::cout << date << " => " << btc << " = " << price << std::endl;
 		}
-		catch (const std::string &e)
+		catch (const std::exception& e)
 		{
-			std::cout << e << std::endl;
-		}
-		catch (const std::exception &e)
-		{
-			std::cout << "Error: bad input => "<< date << std::endl;
+			std::cout << e.what() << std::endl;
 		}
 	}
 }
 
-Fixed	BitcoinExchange::Calculate(const std::string &date, const std::string &price) const
+void BitcoinExchange::parseLine(const std::string& line, std::string& date, std::string& btc) const
 {
-	Fixed	rate;
-	Fixed	tmp;
-	Fixed	fixedPrice(std::stof(price));
+	std::stringstream ss(line);
 
-	if (fixedPrice < 0)
-		throw std::string("Error: not a positve number.");
-	rate = findRate(date);
-	tmp = rate * fixedPrice;
-	if (tmp < 0)
-		throw std::string("Error: too large a number.");
-	return tmp;
+	if (std::count(line.begin(), line.end(), '|') != 1)
+	{
+		throw std::logic_error("Error: bad input => " + line);
+	}
+	std::getline(ss, date, '|');
+	std::getline(ss, btc);
 }
 
-Fixed	BitcoinExchange::findRate(const std::string &date) const
+float BitcoinExchange::toFloat(const std::string& str) const
 {
-	time_t	dt = ExchangeRate::ConvertToTime(date);
-	Fixed	rate;
+	std::stringstream ss(str);
+	float result;
+	ss >> result;
+
+	if (ss.fail())
+	{
+		throw std::logic_error("Error: bad input =>" + str);
+	}
+
+	return result;
+}
+
+float BitcoinExchange::calculate(const std::string& date, const std::string& btc) const
+{
+	float rate;
+	float price;
+	float floatBtc(toFloat(btc));
+
+	if (floatBtc < 0)
+		throw std::logic_error("Error: not a positve number.");
+	if (1000 < floatBtc)
+		throw std::logic_error("Error: too large a number.");
+	rate = findRate(date);
+	price = rate * floatBtc;
+	return price;
+}
+
+float BitcoinExchange::findRate(const std::string& date) const
+{
+	time_t dt = ExchangeRate::convertToTime(date);
+	float rate = 0;
 	std::vector<ExchangeRate>::const_iterator tmpIt = rateHistory_.end();
 
-	for (std::vector<ExchangeRate>::const_iterator it = rateHistory_.begin(); it != rateHistory_.end(); it++)
+	for (std::vector<ExchangeRate>::const_iterator it = rateHistory_.begin();
+		 it != rateHistory_.end();
+		 it++)
 	{
 		if (it->getDate() == dt)
 		{
 			rate = it->getRate();
-			break ;
+			break;
 		}
 		if (tmpIt != rateHistory_.end() && tmpIt->getDate() < dt && dt < it->getDate())
 		{
 			rate = tmpIt->getRate();
-			break ;
+			break;
 		}
 		tmpIt = it;
 	}
