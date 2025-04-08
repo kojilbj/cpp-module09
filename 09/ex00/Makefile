@@ -1,6 +1,6 @@
 CXX=c++
 CXXFLAGS=-Wall -Wextra -Werror -std=c++98 $(INCLUDEDIR)
-SRCS=./src/main.cpp src/BitcoinExchange.cpp src/Fixed.cpp src/ExchangeRate.cpp
+SRCS=./src/main.cpp src/BitcoinExchange.cpp src/ExchangeRate.cpp
 NAME=btc
 OBJS=$(SRCS:.cpp=.o)
 INCLUDEDIR=-Iinclude
