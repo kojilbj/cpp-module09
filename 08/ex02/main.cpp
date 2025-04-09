@@ -1,13 +1,13 @@
 #include "MutantStack.hpp"
+#include <deque>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <deque>
 
 int main()
 {
 	{
-		std::cout << "Default std::deque" << std::endl;
+		std::cout << "MutantStack" << std::endl;
 		MutantStack<int> mstack;
 		mstack.push(5);
 		mstack.push(17);
@@ -32,19 +32,15 @@ int main()
 	}
 	{
 		std::cout << "std::vector" << std::endl;
-		MutantStack<int, std::vector<int> > mstack;
-		mstack.push(5);
-		mstack.push(17);
-		std::cout << "\t" << mstack.top() << std::endl;
-		mstack.pop();
-		std::cout << "\t" << mstack.size() << std::endl;
-		mstack.push(3);
-		mstack.push(5);
-		mstack.push(737);
+		std::vector<int> mstack;
+		mstack.push_back(5);
+		mstack.push_back(3);
+		mstack.push_back(5);
+		mstack.push_back(737);
 		//[...]
-		mstack.push(0);
-		MutantStack<int, std::vector<int> >::iterator it = mstack.begin();
-		MutantStack<int, std::vector<int> >::iterator ite = mstack.end();
+		mstack.push_back(0);
+		std::vector<int>::iterator it = mstack.begin();
+		std::vector<int>::iterator ite = mstack.end();
 		++it;
 		--it;
 		while (it != ite)
