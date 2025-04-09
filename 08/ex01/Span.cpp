@@ -63,10 +63,11 @@ int Span::shortestSpan()
 		throw std::logic_error("container has only one element");
 	std::sort(numbers_.begin(), numbers_.end());
 	std::adjacent_difference(numbers_.begin(), numbers_.end(), diffs.begin());
+	std::sort(diffs.begin() + 1, diffs.end());
 	it = std::find_if(diffs.begin() + 1, diffs.end(), isNonZero);
 	if (it == diffs.end())
 		throw std::logic_error("no span");
-	span = *std::min_element(diffs.begin(), diffs.end());
+	span = *it;
 	return span;
 }
 
