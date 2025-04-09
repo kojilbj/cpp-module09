@@ -1,8 +1,10 @@
 #include <algorithm>
 #include <iostream>
 #include <numeric>
-#include <random>
+#include <ctime>
 #include <string>
+#include <string>
+#include <unistd.h>
 
 #include "Span.hpp"
 
@@ -88,15 +90,12 @@ int Span::longestSpan()
 
 void Span::addRandomNumber()
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dist(0, 10000000);
-
+	std::srand(std::time(0));
 	while (1)
 	{
 		try
 		{
-			addNumber(dist(gen));
+			addNumber(std::rand() % 10000001);
 		}
 		catch (const std::exception& e)
 		{
