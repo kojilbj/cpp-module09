@@ -1,6 +1,8 @@
 #include "MutantStack.hpp"
 #include <iostream>
 #include <string>
+#include <vector>
+#include <deque>
 
 int main()
 {
