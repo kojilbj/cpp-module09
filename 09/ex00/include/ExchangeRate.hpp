@@ -2,6 +2,7 @@
 #define EXCHANGERATE_HPP
 
 #include <time.h>
+#include <string>
 
 struct ExchangeRate
 {

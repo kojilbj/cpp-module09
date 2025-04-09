@@ -26,7 +26,7 @@ BitcoinExchange::~BitcoinExchange() { }
 
 void BitcoinExchange::readRateFile(const std::string& fileName)
 {
-	std::ifstream file(fileName);
+	std::ifstream file(fileName.c_str());
 	std::string buff;
 
 	if (!file.is_open())
@@ -53,7 +53,7 @@ void BitcoinExchange::readRateFile(const std::string& fileName)
 
 void BitcoinExchange::readExchangeFile(const std::string& fileName)
 {
-	std::ifstream file(fileName);
+	std::ifstream file(fileName.c_str());
 	std::string buff;
 
 	if (!file.is_open())
