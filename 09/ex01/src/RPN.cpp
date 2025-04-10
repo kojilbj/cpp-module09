@@ -1,80 +1,69 @@
+#include <exception>
 #include <iostream>
 #include <sstream>
 
-#include "RPN.hpp"
-
-std::stack<int>	RPN::stack_;
-
-RPN::RPN()
+namespace RPN
 {
-	while (!stack_.empty())
+	int toInt(const std::string& str)
 	{
-		stack_.pop();
+		std::stringstream ss(str);
+		int result;
+		ss >> result;
+
+		if (ss.fail())
+		{
+			throw std::runtime_error("Error");
+		}
+
+		return result;
 	}
-}
 
-RPN::~RPN()
-{
-	std::cout << "RPN Destrucor Called" << std::endl;
-}
-
-int	RPN::Calculate(const std::string &formula)
-{
-	Parse(formula);
-	return stack_.top();
-}
-
-void	RPN::Parse(const std::string &formula)
-{
-	std::stringstream	ss(formula);
-	std::string	buff;
-
-	while (std::getline(ss, buff, ' '))
+	void getValues(std::stack<int>& stack, int& left, int& right)
 	{
-		if (buff == "+")
+		if (stack.size() < 2)
+			throw std::runtime_error("Error");
+		right = stack.top();
+		stack.pop();
+		left = stack.top();
+		stack.pop();
+	}
+
+	int calculate(std::stringstream fomula)
+	{
+		std::stack<int> stack;
+		std::string buff;
+
+		while (std::getline(fomula, buff, ' '))
 		{
-			int	a = stack_.top();
-			stack_.pop();
-			int	b = stack_.top();
-			stack_.pop();
-			stack_.push(b + a);
-		}
-		else if (buff == "-")
-		{
-			int	a = stack_.top();
-			stack_.pop();
-			int	b = stack_.top();
-			stack_.pop();
-			stack_.push(b - a);
-		}
-		else if (buff == "*")
-		{
-			int	a = stack_.top();
-			stack_.pop();
-			int	b = stack_.top();
-			stack_.pop();
-			stack_.push(b * a);
-		}
-		else if (buff == "/")
-		{
-			int	a = stack_.top();
-			stack_.pop();
-			int	b = stack_.top();
-			stack_.pop();
-			stack_.push(b / a);
-		}
-		else
-		{
-			try
+			int right, left;
+			if (buff == "+")
 			{
-				stack_.push(std::stoi(buff));
+				getValues(stack, left, right);
+				stack.push(left + right);
 			}
-			catch (const std::exception &e)
+			else if (buff == "-")
 			{
-				throw e;
+				getValues(stack, left, right);
+				stack.push(left - right);
+			}
+			else if (buff == "*")
+			{
+				getValues(stack, left, right);
+				stack.push(left * right);
+			}
+			else if (buff == "/")
+			{
+				getValues(stack, left, right);
+				stack.push(left / right);
+			}
+			else
+			{
+				stack.push(toInt(buff));
 			}
 		}
+		if (stack.size() != 1)
+			throw std::runtime_error("Error");
+		return stack.top();
 	}
-	if (stack_.size() != 1)
-		throw std::exception();
-}
+
+} // namespace RPN
