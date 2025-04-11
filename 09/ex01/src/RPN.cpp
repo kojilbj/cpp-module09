@@ -63,29 +63,24 @@ namespace RPN
 			int right, left;
 			Operator op = getOperator(buff);
 			if (op != NONE)
-			{
 				getValues(stack, left, right);
-				switch (op)
-				{
-				case ADD:
-					stack.push(left + right);
-					break;
-				case SUB:
-					stack.push(left - right);
-					break;
-				case MUL:
-					stack.push(left * right);
-					break;
-				case DIV:
-					stack.push(left / right);
-					break;
-				default:
-					break;
-				}
-			}
-			else
+			switch (op)
 			{
+			case ADD:
+				stack.push(left + right);
+				break;
+			case SUB:
+				stack.push(left - right);
+				break;
+			case MUL:
+				stack.push(left * right);
+				break;
+			case DIV:
+				stack.push(left / right);
+				break;
+			default:
 				stack.push(toInt(buff));
+				break;
 			}
 		}
 		if (stack.size() != 1)
