@@ -57,7 +57,9 @@ namespace RPN
 
 		while (std::getline(fomula, buff, ' '))
 		{
-			std::cout << buff << std::endl;
+			int size = buff.size();
+			if (size == 0)
+				continue;
 			int right, left;
 			Operator op = getOperator(buff);
 			if (op != NONE)
