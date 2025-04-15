@@ -1,7 +1,7 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
-#include <vector>
+#include <list>
 
 #include "ExchangeRate.hpp"
 #include <string>
@@ -22,7 +22,7 @@ public:
 	float findRate(const std::string& date) const;
 
 private:
-	std::vector<struct ExchangeRate> rateHistory_;
+	std::list<struct ExchangeRate> rateHistory_;
 
 	void parseLine(const std::string& line, std::string& date, std::string& price) const;
 	float toFloat(const std::string& str) const;
