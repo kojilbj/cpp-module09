@@ -3,6 +3,9 @@
 
 #include <list>
 #include <deque>
+#include <iterator>
+#include <algorithm>
+
 
 class	PmergeMe
 {
@@ -24,9 +27,41 @@ public:
 		}
 		std::cout << std::endl;
 	}
+	static int compareCount;
 private:
-	static void	FordJohnsonSort(std::deque<int> &list);
-	static void	FordJohnsonSort(std::list<int> &deque);
+	static void	FordJohnsonSort(std::list<int>& X, size_t tupleSize);
+	static void	FordJohnsonSort(std::deque<int> &deque, size_t tupleSize);
+	
+	static size_t	JacobsthalNumber(size_t n);
+
+
+
 };
+
+template <typename T>
+bool	Compare(T left, T right)
+{
+	PmergeMe::compareCount++;
+	return *left < *right;
+}
+
+template <typename T>
+T Advance(T it, int distance)
+{
+	std::advance(it, distance);
+	return it;
+}
+
+template <typename T>
+void	SwapPair(T it, size_t tupleSize)
+{
+	T start = Advance(it, -tupleSize + 1);
+	T end = Advance(start, tupleSize);
+	while (start != end)
+	{
+		std::iter_swap(start, Advance(start, tupleSize));
+		start++;
+	}
+}
 
 #endif

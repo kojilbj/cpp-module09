@@ -1,37 +1,35 @@
-#include <iostream>
 #include <ctime>
+#include <iostream>
 
 #include "PmergeMe.hpp"
 
-
-void	printBefore(char *av[])
+void printBefore(char* av[])
 {
 	std::cout << "Before:";
-	for (size_t i = 0; av[i] != NULL; i++)
+	for (size_t i = 1; av[i] != NULL; i++)
 		std::cout << " " << av[i];
 	std::cout << std::endl;
 }
 
-void	printAfter(char *av[])
+void printAfter(char* av[])
 {
 	std::cout << "After: ";
 	PmergeMe::print(PmergeMe::DequeProcess(av));
 }
 
-void	printListRange(char *av[])
+void printListRange(char* av[])
 {
-	size_t	i;
+	size_t i;
 
 	std::cout << "Time to process a range of ";
 	for (i = 0; av[i] != NULL; i++)
 		;
 	std::cout << i << " elements with std::list";
-
 }
 
-void	printDequeRange(char *av[])
+void printDequeRange(char* av[])
 {
-	size_t	i;
+	size_t i;
 
 	std::cout << "Time to process a range of ";
 	for (i = 0; av[i] != NULL; i++)
@@ -39,7 +37,7 @@ void	printDequeRange(char *av[])
 	std::cout << i << " elements with std::deque";
 }
 
-void	printTime(clock_t start, clock_t end)
+void printTime(clock_t start, clock_t end)
 {
 	double duration;
 
@@ -47,10 +45,10 @@ void	printTime(clock_t start, clock_t end)
 	std::cout << " : " << duration << " us" << std::endl;
 }
 
-int	main(int ac, char *argv[])
+int main(int ac, char* argv[])
 {
-	clock_t	start;
-	clock_t	end;
+	clock_t start;
+	clock_t end;
 
 	if (ac < 2)
 	{
@@ -65,20 +63,22 @@ int	main(int ac, char *argv[])
 			return 0;
 		}
 	}
-	printBefore(&argv[1]);
-	printAfter(&argv[1]);
+	printBefore(argv);
+	printAfter(argv);
 
 	printListRange(&argv[1]);
 
 	start = clock();
-	std::list<int>	list = PmergeMe::ListProcess(&argv[0]);
+	std::list<int> list = PmergeMe::ListProcess(argv);
 	end = clock();
 	printTime(start, end);
+	//std::cout << PmergeMe::compareCount << std::endl;
 
 	printDequeRange(&argv[1]);
 
 	start = clock();
-	std::deque<int>	deque = PmergeMe::DequeProcess(&argv[1]);
+	std::deque<int> deque = PmergeMe::DequeProcess(argv);
 	end = clock();
 	printTime(start, end);
+	//std::cout << PmergeMe::compareCount << std::endl;
 }
