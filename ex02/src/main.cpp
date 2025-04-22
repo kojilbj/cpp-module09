@@ -57,7 +57,7 @@ int main(int ac, char* argv[])
 	}
 	for (size_t i = 1; argv[i] != NULL; i++)
 	{
-		if (std::atoi(argv[i]) < 0 || !std::isdigit(argv[i][0]))
+		if (std::atoi(argv[i]) <= 0 || !std::isdigit(argv[i][0]))
 		{
 			std::cerr << "Error" << std::endl;
 			return 0;
