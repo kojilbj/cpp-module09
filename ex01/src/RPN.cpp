@@ -24,7 +24,10 @@ namespace RPN
 		{
 			throw std::runtime_error("Error toInt: " + str);
 		}
-
+		if (result < 0 || 9 < result)
+		{
+			throw std::runtime_error("Error invalid integer: " + str);
+		}
 		return result;
 	}
 
