@@ -13,7 +13,8 @@ int main(int ac, char* av[])
 	try
 	{
 		std::string fomula(av[1]);
-		std::cout << RPN::calculate(std::stringstream(fomula)) << std::endl;
+		std::stringstream ss(fomula);
+		std::cout << RPN::calculate(ss) << std::endl;
 	}
 	catch (const std::exception& e)
 	{

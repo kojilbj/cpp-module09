@@ -5,6 +5,6 @@
 
 namespace RPN
 {
-	int calculate(std::stringstream formula);
+	int calculate(std::stringstream& formula);
 } // namespace RPN
 #endif

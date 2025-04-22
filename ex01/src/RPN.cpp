@@ -1,6 +1,7 @@
 #include <exception>
 #include <iostream>
 #include <sstream>
+#include <stack>
 
 namespace RPN
 {
@@ -50,7 +51,7 @@ namespace RPN
 		return NONE;
 	}
 
-	int calculate(std::stringstream fomula)
+	int calculate(std::stringstream& fomula)
 	{
 		std::stack<int> stack;
 		std::string buff;
