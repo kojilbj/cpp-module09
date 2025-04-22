@@ -20,7 +20,7 @@ namespace RPN
 		int result;
 		ss >> result;
 
-		if (ss.fail())
+		if (ss.fail() || !ss.eof())
 		{
 			throw std::runtime_error("Error toInt: " + str);
 		}
@@ -77,6 +77,8 @@ namespace RPN
 				stack.push(left * right);
 				break;
 			case DIV:
+				if (right == 0)
+					throw std::runtime_error("Error division by 0.");
 				stack.push(left / right);
 				break;
 			default:
