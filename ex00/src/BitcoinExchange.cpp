@@ -96,7 +96,7 @@ float BitcoinExchange::toFloat(const std::string& str) const
 	float result;
 	ss >> result;
 
-	if (ss.fail())
+	if (ss.fail() || !ss.eof())
 	{
 		throw std::logic_error("Error: bad input =>" + str);
 	}
