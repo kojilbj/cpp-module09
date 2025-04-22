@@ -1,5 +1,6 @@
 #include <ctime>
 #include <iostream>
+#include <exception>
 
 #include "PmergeMe.hpp"
 
@@ -55,30 +56,33 @@ int main(int ac, char* argv[])
 		std::cerr << "Error" << std::endl;
 		return 0;
 	}
-	for (size_t i = 1; argv[i] != NULL; i++)
+	try
 	{
-		if (std::atoi(argv[i]) <= 0 || !std::isdigit(argv[i][0]))
+		for (size_t i = 1; argv[i] != NULL; i++)
 		{
-			std::cerr << "Error" << std::endl;
-			return 0;
+			PmergeMe::toInt(argv[i]);
 		}
+		printBefore(argv);
+		printAfter(argv);
+
+		printListRange(&argv[1]);
+
+		start = clock();
+		std::list<int> list = PmergeMe::ListProcess(argv);
+		end = clock();
+		printTime(start, end);
+		std::cout << PmergeMe::compareCount << std::endl;
+
+		printDequeRange(&argv[1]);
+
+		start = clock();
+		std::deque<int> deque = PmergeMe::DequeProcess(argv);
+		end = clock();
+		printTime(start, end);
+		std::cout << PmergeMe::compareCount << std::endl;
 	}
-	printBefore(argv);
-	printAfter(argv);
-
-	printListRange(&argv[1]);
-
-	start = clock();
-	std::list<int> list = PmergeMe::ListProcess(argv);
-	end = clock();
-	printTime(start, end);
-	std::cout << PmergeMe::compareCount << std::endl;
-
-	printDequeRange(&argv[1]);
-
-	start = clock();
-	std::deque<int> deque = PmergeMe::DequeProcess(argv);
-	end = clock();
-	printTime(start, end);
-	std::cout << PmergeMe::compareCount << std::endl;
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 }

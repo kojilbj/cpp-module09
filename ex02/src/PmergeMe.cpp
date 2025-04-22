@@ -19,6 +19,23 @@ PmergeMe& PmergeMe::operator=(const PmergeMe&)
 
 PmergeMe::~PmergeMe() { }
 
+int PmergeMe::toInt(const std::string& str)
+{
+	std::stringstream ss(str);
+	int result;
+	ss >> result;
+
+	if (ss.fail() || !ss.eof())
+	{
+		throw std::runtime_error("Error");
+	}
+	if (result <= 0)
+	{
+		throw std::runtime_error("Error");
+	}
+	return result;
+}
+
 std::list<int> PmergeMe::ListProcess(char* av[])
 {
 	std::list<int> list;
@@ -26,7 +43,7 @@ std::list<int> PmergeMe::ListProcess(char* av[])
 	PmergeMe::compareCount = 0;
 	for (size_t i = 1; av[i] != NULL; i++)
 	{
-		list.push_back(std::atoi(av[i]));
+		list.push_back(toInt(av[i]));
 	}
 	FordJohnsonSort(list, 1);
 	return list;
