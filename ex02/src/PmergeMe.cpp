@@ -126,6 +126,7 @@ void PmergeMe::FordJohnsonSort(std::list<int>& X, size_t tupleSize)
 	{
 		int currJacob = JacobsthalNumber(k);
 		int jacobDiff = currJacob - prevJacob;
+		int offset = 0;
 		if (jacobDiff > static_cast<int>(pend.size()))
 			break;
 		int insertTime = jacobDiff;
@@ -136,14 +137,16 @@ void PmergeMe::FordJohnsonSort(std::list<int>& X, size_t tupleSize)
 		{
 			std::list<Iterator>::iterator insertIt =
 				std::upper_bound(main.begin(), upperLimitIt, *pendIt, Compare<Iterator>);
-			main.insert(insertIt, *pendIt);
+			std::list<Iterator>::iterator inserted = main.insert(insertIt, *pendIt);
 			insertTime--;
 			pendIt = pend.erase(pendIt);
+			offset += (std::distance(main.begin(), inserted) == currJacob + insertedCount);
 			std::advance(pendIt, -1);
-			upperLimitIt = Advance(main.begin(), currJacob + insertedCount);
+			upperLimitIt = Advance(main.begin(), currJacob + insertedCount - offset);
 		}
 		prevJacob = currJacob;
 		insertedCount += jacobDiff;
+		offset = 0;
 	}
 	for (int i = static_cast<int>(pend.size()) - 1; i >= 0; i--)
 	{
@@ -235,6 +238,7 @@ void PmergeMe::FordJohnsonSort(std::deque<int>& X, size_t tupleSize)
 	{
 		int currJacob = JacobsthalNumber(k);
 		int jacobDiff = currJacob - prevJacob;
+		int offset = 0;
 		if (jacobDiff > static_cast<int>(pend.size()))
 			break;
 		int insertTime = jacobDiff;
@@ -245,14 +249,16 @@ void PmergeMe::FordJohnsonSort(std::deque<int>& X, size_t tupleSize)
 		{
 			std::deque<Iterator>::iterator insertIt =
 				std::upper_bound(main.begin(), upperLimitIt, *pendIt, Compare<Iterator>);
-			main.insert(insertIt, *pendIt);
+			std::deque<Iterator>::iterator inserted = main.insert(insertIt, *pendIt);
 			insertTime--;
 			pendIt = pend.erase(pendIt);
 			std::advance(pendIt, -1);
-			upperLimitIt = Advance(main.begin(), currJacob + insertedCount);
+			offset += (std::distance(main.begin(), inserted) == currJacob + insertedCount);
+			upperLimitIt = Advance(main.begin(), currJacob + insertedCount - offset);
 		}
 		prevJacob = currJacob;
 		insertedCount += jacobDiff;
+		offset = 0;
 	}
 	for (int i = static_cast<int>(pend.size()) - 1; i >= 0; i--)
 	{
