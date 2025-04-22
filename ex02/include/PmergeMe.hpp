@@ -27,6 +27,8 @@ public:
 		}
 		std::cout << std::endl;
 	}
+	static int toInt(const std::string& str);
+
 	static int compareCount;
 private:
 	static void	FordJohnsonSort(std::list<int>& X, size_t tupleSize);
