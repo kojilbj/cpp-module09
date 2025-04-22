@@ -49,26 +49,24 @@ size_t PmergeMe::JacobsthalNumber(size_t n)
 	return round((pow(2, n + 1) + pow(-1, n)) / 3);
 }
 
-// first tupleSize should be 1.
-// demo X = {9, 3, 2, 4, 5}
 void PmergeMe::FordJohnsonSort(std::list<int>& X, size_t tupleSize)
 {
 	if (tupleSize < 1)
 		throw std::invalid_argument("When firstly call FordJonsonSort, tupleSize should be 1.");
-	int pairUnits = X.size() / tupleSize; // the number of pair units. demo 4
-	if (pairUnits < 2) // pairUnitsが2以下の場合はwikiの3のプロセスが出来なくなるため再帰終了
+	int pairUnits = X.size() / tupleSize;
+	if (pairUnits < 2)
 		return;
 
 	bool isOdd =
-		(pairUnits % 2 == 1); // pairが奇数個の場合は挿入する側にするためboolで保持 demo true
-	std::list<int>::iterator start = X.begin(); // demo *start = 9
-	std::list<int>::iterator last = Advance(X.begin(), tupleSize * pairUnits); // demo *last = 5
-	std::list<int>::iterator end = Advance(last, -(isOdd * tupleSize)); // demo *end = 4
+		(pairUnits % 2 == 1);
+	std::list<int>::iterator start = X.begin();
+	std::list<int>::iterator last = Advance(X.begin(), tupleSize * pairUnits);
+	std::list<int>::iterator end = Advance(last, -(isOdd * tupleSize));
 
 	int skip = 2 * tupleSize;
 	for (std::list<int>::iterator it = start; it != end; std::advance(it, skip))
 	{
-		std::list<int>::iterator currPair = Advance(it, tupleSize - 1); //tupleの中の一番右の要素
+		std::list<int>::iterator currPair = Advance(it, tupleSize - 1);
 		std::list<int>::iterator nextPair = Advance(it, tupleSize * 2 - 1);
 		if (Compare(nextPair, currPair))
 		{
@@ -84,11 +82,11 @@ void PmergeMe::FordJohnsonSort(std::list<int>& X, size_t tupleSize)
 	main.insert(
 		main.end(),
 		Advance(X.begin(),
-				tupleSize - 1)); //ソートされている要素の中で一番低い値のイテレーターをmainに入れる
+				tupleSize - 1));
 	main.insert(
 		main.end(),
 		Advance(X.begin(),
-				tupleSize * 2 - 1)); //ソートされている要素の次に低い値のイテレーターをmainに入れる
+				tupleSize * 2 - 1));
 
 	for (int i = 4; i <= pairUnits; i += 2)
 	{
@@ -100,6 +98,9 @@ void PmergeMe::FordJohnsonSort(std::list<int>& X, size_t tupleSize)
 	{
 		pend.insert(pend.end(), Advance(end, tupleSize - 1));
 	}
+
+	if (pend.size() == 0)
+		return;
 
 	int prevJacob = JacobsthalNumber(1);
 	int insertedCount = 0;
@@ -140,7 +141,6 @@ void PmergeMe::FordJohnsonSort(std::list<int>& X, size_t tupleSize)
 	}
 
 	std::list<int> copy;
-	// copy.reserve(X.size());
 	for (std::list<Iterator>::iterator it = main.begin(); it != main.end(); it++)
 	{
 		for (size_t i = 0; i < tupleSize; i++)
@@ -165,20 +165,20 @@ void PmergeMe::FordJohnsonSort(std::deque<int>& X, size_t tupleSize)
 {
 	if (tupleSize < 1)
 		throw std::invalid_argument("When firstly call FordJonsonSort, tupleSize should be 1.");
-	int pairUnits = X.size() / tupleSize; // the number of pair units. demo 4
-	if (pairUnits < 2) // pairUnitsが2以下の場合はwikiの3のプロセスが出来なくなるため再帰終了
+	int pairUnits = X.size() / tupleSize;
+	if (pairUnits < 2)
 		return;
 
 	bool isOdd =
-		(pairUnits % 2 == 1); // pairが奇数個の場合は挿入する側にするためboolで保持 demo true
-	std::deque<int>::iterator start = X.begin(); // demo *start = 9
-	std::deque<int>::iterator last = Advance(X.begin(), tupleSize * pairUnits); // demo *last = 5
-	std::deque<int>::iterator end = Advance(last, -(isOdd * tupleSize)); // demo *end = 4
+		(pairUnits % 2 == 1);
+	std::deque<int>::iterator start = X.begin();
+	std::deque<int>::iterator last = Advance(X.begin(), tupleSize * pairUnits);
+	std::deque<int>::iterator end = Advance(last, -(isOdd * tupleSize));
 
 	int skip = 2 * tupleSize;
 	for (std::deque<int>::iterator it = start; it != end; std::advance(it, skip))
 	{
-		std::deque<int>::iterator currPair = Advance(it, tupleSize - 1); //tupleの中の一番右の要素
+		std::deque<int>::iterator currPair = Advance(it, tupleSize - 1);
 		std::deque<int>::iterator nextPair = Advance(it, tupleSize * 2 - 1);
 		if (Compare(nextPair, currPair))
 		{
@@ -194,11 +194,11 @@ void PmergeMe::FordJohnsonSort(std::deque<int>& X, size_t tupleSize)
 	main.insert(
 		main.end(),
 		Advance(X.begin(),
-				tupleSize - 1)); //ソートされている要素の中で一番低い値のイテレーターをmainに入れる
+				tupleSize - 1));
 	main.insert(
 		main.end(),
 		Advance(X.begin(),
-				tupleSize * 2 - 1)); //ソートされている要素の次に低い値のイテレーターをmainに入れる
+				tupleSize * 2 - 1));
 
 	for (int i = 4; i <= pairUnits; i += 2)
 	{
@@ -210,6 +210,9 @@ void PmergeMe::FordJohnsonSort(std::deque<int>& X, size_t tupleSize)
 	{
 		pend.insert(pend.end(), Advance(end, tupleSize - 1));
 	}
+
+	if (pend.size() == 0)
+		return;
 
 	int prevJacob = JacobsthalNumber(1);
 	int insertedCount = 0;
@@ -250,7 +253,6 @@ void PmergeMe::FordJohnsonSort(std::deque<int>& X, size_t tupleSize)
 	}
 
 	std::deque<int> copy;
-	// copy.reserve(X.size());
 	for (std::deque<Iterator>::iterator it = main.begin(); it != main.end(); it++)
 	{
 		for (size_t i = 0; i < tupleSize; i++)

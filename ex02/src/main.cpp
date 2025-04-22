@@ -72,7 +72,7 @@ int main(int ac, char* argv[])
 	std::list<int> list = PmergeMe::ListProcess(argv);
 	end = clock();
 	printTime(start, end);
-	//std::cout << PmergeMe::compareCount << std::endl;
+	std::cout << PmergeMe::compareCount << std::endl;
 
 	printDequeRange(&argv[1]);
 
@@ -80,5 +80,5 @@ int main(int ac, char* argv[])
 	std::deque<int> deque = PmergeMe::DequeProcess(argv);
 	end = clock();
 	printTime(start, end);
-	//std::cout << PmergeMe::compareCount << std::endl;
+	std::cout << PmergeMe::compareCount << std::endl;
 }
