@@ -123,15 +123,15 @@ float BitcoinExchange::findRate(const std::string& date) const
 {
 	time_t dt = ExchangeRate::convertToTime(date);
 	float rate = 0;
-	std::list<ExchangeRate>::const_iterator tmpIt = rateHistory_.end();
-	std::list<ExchangeRate>::const_iterator last = rateHistory_.end();
+	std::vector<ExchangeRate>::const_iterator tmpIt = rateHistory_.end();
+	std::vector<ExchangeRate>::const_iterator last = rateHistory_.end();
 	--last;
 
 	if (last->getDate() < dt)
 	{
 		return (last->getRate());
 	}
-	for (std::list<ExchangeRate>::const_iterator it = rateHistory_.begin();
+	for (std::vector<ExchangeRate>::const_iterator it = rateHistory_.begin();
 		 it != rateHistory_.end();
 		 it++)
 	{

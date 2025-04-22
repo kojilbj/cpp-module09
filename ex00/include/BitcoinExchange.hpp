@@ -22,7 +22,7 @@ public:
 	float findRate(const std::string& date) const;
 
 private:
-	std::list<struct ExchangeRate> rateHistory_;
+	std::vector<struct ExchangeRate> rateHistory_;
 
 	void parseLine(const std::string& line, std::string& date, std::string& price) const;
 	float toFloat(const std::string& str) const;
